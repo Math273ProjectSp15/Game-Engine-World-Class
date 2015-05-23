@@ -140,7 +140,10 @@ void Mario::update(float frameTime)
 		//	velocity.y = -4 * marioNS::SPEED;
 		//}
 	}
-	velocity.y += frameTime * 3 * GRAVITY;
+	if (!onGround)
+		velocity.y += frameTime * 3 * GRAVITY;
+	else
+		velocity.y = 0;
 }
 
 //=============================================================================

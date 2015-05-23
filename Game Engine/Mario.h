@@ -46,7 +46,7 @@ namespace marioNS
 	const int JUMP_FALL_MARIO_END_FRAME = 3;
 	const float JUMP_FALL_ANIMATION_DELAY = 1.0f;
 
-	//Collision RECTS
+	//Collision RECTS      left, top, right, bottom
 	const RECT IDLE_RECT = {-56, -128, 55, 128};
 	//const RECT RUN_RECT = {-94, -128, 94, 128};
 	const RECT RUN_RECT = { -56, -128, 55, 128 };

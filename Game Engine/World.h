@@ -52,6 +52,8 @@ protected:
 	void updateWindow();
 	//Set scrollVector_ so that mario_ is centered in the window unless at the edges of the map
 	void updateScroll();
+
+	int distanceToRightEdge;
 public:
 	//World() {};
 	World();
