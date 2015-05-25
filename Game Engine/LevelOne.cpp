@@ -32,6 +32,11 @@ void LevelOne::initialize(HWND hwnd)
 	if (!platform_.initialize(this, PLATFORM_WIDTH, PLATFORM_HEIGHT, PLATFORM_COLUMNS, &platformTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform texture"));
 
+	if (!yellowVillain_.initialize(this, &villainsTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain texture"));
+	yellowVillain_.setX(GAME_WIDTH / 2);
+	yellowVillain_.setY(GAME_HEIGHT / 2);
+
 	platform_.setFrames(PLATFORM_START_FRAME, PLATFORM_END_FRAME);
 	platform_.setX(mario_.getX() + mario_.getWidth() + 250);
 	platform_.setY(mario_.getY() + 100);
@@ -44,6 +49,7 @@ void LevelOne::initialize(HWND hwnd)
 	platform_.setCollisionType(entityNS::BOX);
 
 	entities_.push_back(&platform_);
+	villains_.push_back(&yellowVillain_);
 
 	//Fill World containers with references to Image and Entity objects.
 	backgroundImages_.push_back(&background_);

@@ -19,6 +19,7 @@ const char BACKGROUND_IMAGE[] = "pictures\\background.png";
 const char MARIO_IMAGE[]	= "pictures\\RedHeadBoy.png"; 
 const char DARK_MARIO_IMAGE[] = "pictures\\DarkMario_2048x2048.png";
 const char PLATFORM_IMAGE[] = "pictures\\Platform.png";
+const char VILLAINS_IMAGE[] = "pictures\\Villains.png";
 
 // window
 const char CLASS_NAME[] = "MarioGame";

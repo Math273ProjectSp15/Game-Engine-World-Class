@@ -54,6 +54,24 @@
     <ClInclude Include="LevelOne.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="YellowVillain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyanVillain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenVillain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PeriwinkleVillain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PurpleVillain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RedVillain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entity.cpp">
@@ -90,6 +108,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelOne.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="YellowVillain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyanVillain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenVillain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PeriwinkleVillain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PurpleVillain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RedVillain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

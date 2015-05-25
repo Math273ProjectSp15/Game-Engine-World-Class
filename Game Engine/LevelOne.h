@@ -1,6 +1,12 @@
 #pragma once
 
 #include "World.h"
+#include "YellowVillain.h"
+#include "CyanVillain.h"
+#include "GreenVillain.h"
+#include "PeriwinkleVillain.h"
+#include "PurpleVillain.h"
+#include "RedVillain.h"
 
 namespace levelOneNS {
 	const int worldWidth = 3072;
@@ -34,4 +40,5 @@ private:
 	//Entity Objects
 	Entity platform_;
 
+	RedVillain yellowVillain_;
 };

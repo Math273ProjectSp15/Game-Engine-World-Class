@@ -99,9 +99,14 @@ public:
 
 	//Return the width of the correct mario image
 	int getMarioWidth();
-	bool onGround;
+	
+	//set and get for onGround_
+	void onGround() { onGround_ = true; }
+	void notOnGround() { onGround_ = false; }
+	bool isOnGround() { return onGround_; }
 protected:
 	marioNS::State state_;
 	marioNS::Direction direction_;
+	bool onGround_;
 
 };

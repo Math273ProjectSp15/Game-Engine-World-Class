@@ -13,31 +13,43 @@
   <ItemGroup>
     <ClInclude Include="background.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="CyanVillain.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameError.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="GreenVillain.h" />
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="MarioGame.h" />
+    <ClInclude Include="PeriwinkleVillain.h" />
+    <ClInclude Include="PurpleVillain.h" />
+    <ClInclude Include="RedVillain.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="YellowVillain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="background.cpp" />
+    <ClCompile Include="CyanVillain.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="GreenVillain.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="MarioGame.cpp" />
+    <ClCompile Include="PeriwinkleVillain.cpp" />
+    <ClCompile Include="PurpleVillain.cpp" />
+    <ClCompile Include="RedVillain.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="YellowVillain.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{98733565-0B5C-46F1-9FD0-8A5AB0433ACC}</ProjectGuid>

@@ -25,7 +25,7 @@ Mario::Mario() : Entity()
 
 	state_ = marioNS::IDLEING;
 	direction_ = marioNS::RIGHT;
-	onGround = true;
+	onGround();
 }
 
 //=============================================================================
@@ -88,7 +88,7 @@ void Mario::update(float frameTime)
 	else if (spriteData.y > GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT) // else if below ground
 	{
 		spriteData.y = GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT;
-		onGround = true;
+		onGround();
 	}
 
 	if (getState() == marioNS::IDLEING)
@@ -130,17 +130,17 @@ void Mario::update(float frameTime)
 	}
 	else if (getState() == marioNS::JUMPING)
 	{
-		if (onGround)
+		if (isOnGround())
 		{
 			velocity.y = -4 * marioNS::SPEED;
-			onGround = false;
+			notOnGround();
 		}
 		//if (spriteData.y == GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT)
 		//{
 		//	velocity.y = -4 * marioNS::SPEED;
 		//}
 	}
-	if (!onGround)
+	if (!isOnGround())
 		velocity.y += frameTime * 3 * GRAVITY;
 	else
 		velocity.y = 0;

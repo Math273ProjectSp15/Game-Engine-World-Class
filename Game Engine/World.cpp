@@ -23,6 +23,9 @@ void World::initialize(HWND hwnd)
 	// mario_ texture
 	if (!marioTexture_.initialize(graphics, DARK_MARIO_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario_ texture"));
+	// Villains texture
+	if (!villainsTexture_.initialize(graphics, VILLAINS_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario_ texture"));
 	// mario_
 	if (!mario_.initialize(this, marioNS::WIDTH, marioNS::HEIGHT, marioNS::TEXTURE_COLS, &marioTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario texture"));
@@ -77,6 +80,7 @@ void World::update()      // must override pure virtual from Game
 		mario_.setEdge(marioNS::IDLE_RECT);
 	}
 	mario_.update(frameTime);
+	villains_[0]->update(frameTime);
 	updateScroll();
 }
 
@@ -96,12 +100,12 @@ void World::collisions()  // "
 			VECTOR2 standStill = { 0, mario_.getVelocity().y };
 			mario_.setY(entity->getY() - mario_.getHeight());
 			mario_.setVelocity(standStill);
-			mario_.onGround = true;
+			mario_.onGround();
 			collisionDetected = true;
 		}
 	}
 	if (!collisionDetected)
-		mario_.onGround = false;
+		mario_.notOnGround();
 }
 
 void World::render()      // "
@@ -124,12 +128,21 @@ void World::render()      // "
 		}
 	}
 
+	if (!villains_.empty())
+	{
+		for (auto villain : villains_)
+		{
+			villain->draw();
+		}
+	}
+
 	graphics->spriteEnd();                  // end drawing sprites
 }
 
 void World::releaseAll()
 {
 	marioTexture_.onLostDevice();
+	villainsTexture_.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -137,6 +150,7 @@ void World::releaseAll()
 void World::resetAll()
 {
 	marioTexture_.onResetDevice();
+	villainsTexture_.onResetDevice();
 	Game::resetAll();
 	return;
 }
@@ -180,14 +194,14 @@ void World::updateScroll()
 			}
 		}
 
-		if (!villains_.empty())
-		{
-			for (auto villain : villains_)
-			{
-				villain->setX(villain->getX() - scrollX);
-				//villain.second->setY(villain.second->getY() + scrollVector_.y);
-			}
-		}
+		//if (!villains_.empty())
+		//{
+		//	for (auto villain : villains_)
+		//	{
+		//		villain->setX(villain->getX() - scrollX);
+		//		//villain.second->setY(villain.second->getY() + scrollVector_.y);
+		//	}
+		//}
 
 		//windowRECT_.left += scrollX;
 		//windowRECT_.right += scrollX;
