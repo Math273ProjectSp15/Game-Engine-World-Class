@@ -30,8 +30,6 @@ const char GAME_TITLE[] = "MarioGame";
 const bool FULLSCREEN = false;              // windowed or fullscreen
 const UINT GAME_WIDTH =  1200;               // width of game in pixels
 const UINT GAME_HEIGHT = 800;               // height of game in pixels
-
-const float GROUND_HEIGHT = 160;
  
 // game
 const bool VSYNC = true;                    // true locks display to vertical sync rate
@@ -57,6 +55,8 @@ const int GROUND_ENTITY_HEIGHT = 128;
 const int GROUND_ENTITY_COLUMNS = 1;
 const int GROUND_ENTITY_START_FRAME = 0;
 const int GROUND_ENTITY_END_FRAME = 0;
+
+const float GROUND_Y_POSITION = GAME_HEIGHT - GROUND_ENTITY_HEIGHT;
 
 // audio files required by audio.cpp
 // WAVE_BANK must be location of .xwb file.

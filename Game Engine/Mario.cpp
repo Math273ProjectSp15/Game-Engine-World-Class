@@ -26,6 +26,7 @@ Mario::Mario() : Entity()
 	state_ = marioNS::IDLEING;
 	direction_ = marioNS::RIGHT;
 	onGround();
+	dead_ = false;
 }
 
 //=============================================================================
@@ -84,20 +85,22 @@ void Mario::update(float frameTime)
 	{
 		spriteData.x = 50;
 		velocity.x = 0;
+		velocity.y = 0;
 	}
-	else if (spriteData.y > GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT) // else if below ground
+	else if (spriteData.y > GROUND_Y_POSITION) // else if below ground
 	{
-		spriteData.y = GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT;
-		onGround();
+	//	spriteData.y = GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT;
+	//	onGround();
+		marioDied();
 	}
 
 	if (getState() == marioNS::IDLEING)
 	{
 		setFrames(marioNS::IDLE_MARIO_START_FRAME, marioNS::IDLE_MARIO_END_FRAME);
-		if (spriteData.y == GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT)
-		{
-			velocity.x = 0;
-		}
+		//if (spriteData.y == GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT)
+		//{
+		//	velocity.x = 0;
+		//}
 	}
 	else if (getState() == marioNS::WALKING)
 	{
@@ -214,5 +217,14 @@ int Mario::getMarioWidth()
 	{
 		return Image::getWidth();
 	}
+}
+
+void Mario::resetMario()
+{ 
+	spriteData.x = marioNS::X;                 // location on screen
+	spriteData.y = marioNS::Y;
+	velocity.x = 0;
+	velocity.y = 0;
+	onGround();
 }
 

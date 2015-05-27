@@ -5,7 +5,6 @@
 #include "textureManager.h"
 #include "image.h"
 #include "Mario.h"
-#include "background.h"
 #include "LevelOne.h"
 
 class MarioGame

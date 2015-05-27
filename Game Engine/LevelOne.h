@@ -47,5 +47,5 @@ private:
 	Entity platform_;
 	Entity ground_;
 
-	RedVillain yellowVillain_;
+	PurpleVillain yellowVillain_;
 };

@@ -34,6 +34,7 @@ protected:
 	TextureManager marioTexture_;
 	//Marios position in World
 	VECTOR2	marioPositionVector_;
+	VECTOR2 marioInitialPositionVector_;
 	//World width and height
 	int worldWidth_, worldHeight_;
 	//Determine where the window edges are in World
@@ -50,6 +51,8 @@ protected:
 
 	//Set scrollVector_ so that mario_ is centered in the window unless at the edges of the map
 	void updateScroll();
+
+	void resetMarioPosition();
 
 	int distanceToRightEdge;
 public:
