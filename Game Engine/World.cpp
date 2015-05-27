@@ -171,6 +171,7 @@ void World::updateScroll()
 	marioPositionVector_.x += scrollX;
 	marioPositionVector_.y += scrollY;
 
+	//TODO: Add in this effect for the y direction.  Should only scroll in y direction if within its bounds. 
 	if (marioPositionVector_.x >= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER) && marioPositionVector_.x <= distanceToRightEdge - worldNS::EDGE_SPACER)
 	{
 		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - scrollX * 0.25);
