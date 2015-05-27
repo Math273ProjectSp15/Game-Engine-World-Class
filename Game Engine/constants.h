@@ -16,6 +16,9 @@
 //=============================================================================
 // graphic images
 const char BACKGROUND_IMAGE[] = "pictures\\background.png";
+const char BACKGROUND_LAYER1[] = "pictures\\layer-1-sky.png";
+const char BACKGROUND_LAYER2[] = "pictures\\layer-2-ghosts.png";
+const char GROUND_IMAGE[] = "pictures\\layer-3-ground_125X509.png";
 const char MARIO_IMAGE[]	= "pictures\\RedHeadBoy.png"; 
 const char DARK_MARIO_IMAGE[] = "pictures\\DarkMario_2048x2048.png";
 const char PLATFORM_IMAGE[] = "pictures\\Platform.png";
@@ -48,6 +51,12 @@ const int PLATFORM_COLUMNS = 1;
 const int PLATFORM_START_FRAME = 0;
 const int PLATFORM_END_FRAME = 0;
 
+//ground
+const int GROUND_ENTITY_WIDTH = 512;
+const int GROUND_ENTITY_HEIGHT = 128;
+const int GROUND_ENTITY_COLUMNS = 1;
+const int GROUND_ENTITY_START_FRAME = 0;
+const int GROUND_ENTITY_END_FRAME = 0;
 
 // audio files required by audio.cpp
 // WAVE_BANK must be location of .xwb file.

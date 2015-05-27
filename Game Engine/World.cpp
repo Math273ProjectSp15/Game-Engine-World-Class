@@ -5,8 +5,8 @@ World::World()
 {
 	windowRECT_.left = 0;
 	windowRECT_.right = GAME_WIDTH;
-	windowRECT_.top = marioPositionVector_.y - GAME_HEIGHT / 2;
-	windowRECT_.bottom = windowRECT_.top + GAME_HEIGHT + mario_.getHeight();
+	windowRECT_.top = GAME_HEIGHT;
+	windowRECT_.bottom = 0;
 }
 
 
@@ -112,7 +112,16 @@ void World::render()      // "
 {
 	graphics->spriteBegin();                // begin drawing sprites
 
-	backgroundImages_[0]->draw();                     // add the background to the scene
+
+	if (!backgroundImages_.empty())
+	{
+		for (auto background : backgroundImages_)
+		{
+			background->draw();
+		}
+	}
+
+
 	mario_.draw();                          // add mario to the scene
 
 	//Draw entities that are within the bounds of the window
@@ -124,7 +133,6 @@ void World::render()      // "
 			{
 				entity->draw();
 			}
-//			entity->draw();
 		}
 	}
 
@@ -155,35 +163,19 @@ void World::resetAll()
 	return;
 }
 
-void World::updateWindow()
-{
-	//May need to change the mario_.getHeight() function, although all images are the same height
-	//windowRECT_.top = marioPositionVector_.y - (GAME_HEIGHT / 2 - mario_.getHeight());
-	//windowRECT_.bottom = windowRECT_.top + GAME_HEIGHT;
-
-	//TODO: Fix this code
-	//if (marioPositionVector_.y < GAME_HEIGHT / 2 - mario_.getHeight() / 2)
-	//{
-	//	windowRECT_.top = 0;
-	//	windowRECT_.bottom = GAME_HEIGHT;
-	//}
-
-	//if (marioPositionVector_.y > worldHeight_ - GAME_HEIGHT / 2 - mario_.getHeight() / 2)
-	//{
-	//	windowRECT_.top = worldHeight_ - GAME_HEIGHT;
-	//	windowRECT_.bottom = worldHeight_;
-	//}
-
-}
 
 void World::updateScroll()
 {
 	double scrollX = frameTime * mario_.getVelocity().x;
+	double scrollY = frameTime * mario_.getVelocity().y;
 	marioPositionVector_.x += scrollX;
+	marioPositionVector_.y += scrollY;
 
 	if (marioPositionVector_.x >= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER) && marioPositionVector_.x <= distanceToRightEdge - worldNS::EDGE_SPACER)
 	{
-		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - scrollX);
+		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - scrollX * 0.25);
+		//paralax scrolling 
+		backgroundImages_[1]->setX(backgroundImages_[1]->getX() - (scrollX * 0.5));
 
 		if (!entities_.empty())
 		{
@@ -203,20 +195,6 @@ void World::updateScroll()
 		//	}
 		//}
 
-		//windowRECT_.left += scrollX;
-		//windowRECT_.right += scrollX;
-
-
-		//if (marioPositionVector_.x <= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER))
-		//{
-		//	windowRECT_.left = 0;
-		//	windowRECT_.right = GAME_WIDTH;
-		//}
-		//else if (marioPositionVector_.x >= distanceToRightEdge - worldNS::EDGE_SPACER)
-		//{
-		//	windowRECT_.right = worldWidth_;
-		//	windowRECT_.left = windowRECT_.right - GAME_WIDTH;
-		//}
 	}
 	else
 	{
