@@ -60,6 +60,12 @@ bool Mario::initialize(Game *gamePtr, int width, int height, int ncols,
 	marioJumpFall_.setCurrentFrame(marioNS::JUMP_FALL_MARIO_START_FRAME);
 	marioJumpFall_.setFrameDelay(marioNS::JUMP_FALL_ANIMATION_DELAY);
 
+	horizontalAttack_.initialize(gamePtr->getGraphics(), marioNS::HORIZONTAL_ATTACK_IMAGE_WIDTH,
+		marioNS::HORIZONTAL_ATTACK_IMAGE_HEIGHT, marioNS::HORIZONTAL_ATTACK_TEXTURE_COLS, textureM);
+	horizontalAttack_.setFrames(marioNS::HORIZONTAL_ATTACK_START_FRAME, marioNS::HORIZONTAL_ATTACK_END_FRAME);
+	horizontalAttack_.setCurrentFrame(marioNS::HORIZONTAL_ATTACK_START_FRAME);
+	horizontalAttack_.setFrameDelay(marioNS::HORIZONTAL_ATTACK_ANIMATION_DELAY);
+
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
@@ -165,6 +171,10 @@ void Mario::draw()
 			marioJumpUp_.draw(spriteData);
 		else
 			marioJumpFall_.draw(spriteData);
+	}
+	else if (state_ == marioNS::HORIZONTAL_ATTACK)
+	{
+		horizontalAttack_.draw(spriteData);
 	}
 	else
 	{

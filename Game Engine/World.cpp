@@ -74,6 +74,10 @@ void World::update()      // must override pure virtual from Game
 		mario_.setState(marioNS::JUMPING);
 		mario_.setEdge(marioNS::JUMP_UP_RECT);
 	}
+	else if (input->isKeyDown(ALT_KEY))
+	{
+		mario_.setState(marioNS::HORIZONTAL_ATTACK);
+	}
 	else
 	{
 		mario_.setState(marioNS::IDLEING);

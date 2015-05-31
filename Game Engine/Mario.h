@@ -37,14 +37,21 @@ namespace marioNS
 	const int JUMP_UP_TEXTURE_COLS = 6;
 	const int JUMP_UP_MARIO_START_FRAME = 5;
 	const int JUMP_UP_MARIO_END_FRAME = 4;
-	const float JUMP_UP_ANIMATION_DELAY = 1.0f;
+	const float JUMP_UP_ANIMATION_DELAY = 0.1f;
 
 	const int JUMP_FALL_IMAGE_WIDTH = 256;
 	const int JUMP_FALL_IMAGE_HEIGHT = 256;
 	const int JUMP_FALL_TEXTURE_COLS = 4;
 	const int JUMP_FALL_MARIO_START_FRAME = 3;
 	const int JUMP_FALL_MARIO_END_FRAME = 3;
-	const float JUMP_FALL_ANIMATION_DELAY = 1.0f;
+	const float JUMP_FALL_ANIMATION_DELAY = 0.1f;
+
+	const int HORIZONTAL_ATTACK_IMAGE_WIDTH = 512;
+	const int HORIZONTAL_ATTACK_IMAGE_HEIGHT = 256;
+	const int HORIZONTAL_ATTACK_TEXTURE_COLS = 4;
+	const int HORIZONTAL_ATTACK_START_FRAME = 20;
+	const int HORIZONTAL_ATTACK_END_FRAME = 23;
+	const float HORIZONTAL_ATTACK_ANIMATION_DELAY = 0.1f;
 
 	//Collision RECTS      left, top, right, bottom
 	const RECT IDLE_RECT = {-40, -128, 40, 128};
@@ -60,6 +67,7 @@ namespace marioNS
 		WALKING,
 		ROLLING,
 		JUMPING,
+		HORIZONTAL_ATTACK
 	};
 
 	enum Direction
@@ -79,6 +87,7 @@ private:
 	Image marioRolling_;
 	Image marioJumpUp_;
 	Image marioJumpFall_;
+	Image horizontalAttack_;
 
 public:
 	// constructor
