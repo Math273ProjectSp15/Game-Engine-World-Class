@@ -6,11 +6,13 @@ LevelOne::LevelOne()
 	worldHeight_ = levelOneNS::worldHeight;
 	marioPositionVector_.x = levelOneNS::marioInitialPositionX;
 	marioPositionVector_.y = levelOneNS::marioInitialPositionY;
+	marioInitialPositionVector_.x = marioPositionVector_.x;
+	marioInitialPositionVector_.y = marioPositionVector_.y;
 }
 
 LevelOne::~LevelOne()
 {
-
+	
 }
 
 void LevelOne::initialize(HWND hwnd)
@@ -54,14 +56,14 @@ void LevelOne::initialize(HWND hwnd)
 	yellowVillain_.setY(GAME_HEIGHT / 2);
 
 	platform_.setFrames(PLATFORM_START_FRAME, PLATFORM_END_FRAME);
-	platform_.setX(mario_.getX() + mario_.getWidth() + 250);
-	platform_.setY(mario_.getY() + 100);
+	platform_.setX(mario_.getX() + 250);
+	platform_.setY(GROUND_Y_POSITION - 100);
 	platform_.setEdge(levelOneNS::platformRECT);
 	platform_.setCollisionType(entityNS::BOX);
 
 	ground_.setFrames(GROUND_ENTITY_START_FRAME, GROUND_ENTITY_END_FRAME);
 	ground_.setX(mario_.getX() - 200);
-	ground_.setY(500);
+	ground_.setY(GROUND_Y_POSITION);
 	ground_.setEdge(levelOneNS::groundRECT);
 	ground_.setCollisionType(entityNS::BOX);
 

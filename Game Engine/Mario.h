@@ -4,7 +4,6 @@
 #include "entity.h"
 #include "constants.h"
 #include "cmath"
-#include "background.h"
 
 namespace marioNS
 {
@@ -113,9 +112,17 @@ public:
 	void onGround() { onGround_ = true; }
 	void notOnGround() { onGround_ = false; }
 	bool isOnGround() { return onGround_; }
+
+	//set and get for dead_
+	bool isDead() { return dead_; }
+	void marioDied() { dead_ = true; }
+	void marioUndead() { dead_ = false; }
+
+	void resetMario();
 protected:
 	marioNS::State state_;
 	marioNS::Direction direction_;
 	bool onGround_;
+	bool dead_;
 
 };
