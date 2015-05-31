@@ -69,14 +69,22 @@ void World::update()      // must override pure virtual from Game
 		mario_.setState(marioNS::ROLLING);
 		mario_.setEdge(marioNS::ROLLING_RECT);
 	}
-	else if (input->isKeyDown(UP_KEY) || input->getGamepadDPadUp(0))
+	else if (input->isKeyDown(UP_KEY) )
 	{
 		mario_.setState(marioNS::JUMPING);
 		mario_.setEdge(marioNS::JUMP_UP_RECT);
 	}
-	else if (input->isKeyDown(ALT_KEY))
+	else if (input->isKeyDown(F_KEY))
 	{
 		mario_.setState(marioNS::HORIZONTAL_ATTACK);
+	}
+	else if (input->isKeyDown(D_KEY))
+	{
+		mario_.setState(marioNS::CLAW_ATTACK);
+	}
+	else if (input->isKeyDown(S_KEY))
+	{
+		mario_.setState(marioNS::SHOOT_ATTACK);
 	}
 	else
 	{

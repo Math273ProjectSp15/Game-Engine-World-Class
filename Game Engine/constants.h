@@ -77,6 +77,9 @@ const UCHAR LEFT_KEY    = VK_LEFT;      // left arrow
 const UCHAR RIGHT_KEY   = VK_RIGHT;     // right arrow
 const UCHAR DOWN_KEY	= VK_DOWN;		// down arrow
 const UCHAR UP_KEY = VK_UP;		        // up arrow
+const UCHAR F_KEY = 0x46;
+const UCHAR D_KEY = 0x44;
+const UCHAR S_KEY = 0x53;
 
 //=============================================================================
 // Function templates for safely dealing with pointer referenced items.
