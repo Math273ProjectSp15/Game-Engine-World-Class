@@ -19,9 +19,9 @@ namespace marioNS
 
 	const int WALKING_IMAGE_WIDTH = 256;
 	const int WALKING_IMAGE_HEIGHT = 256;
-	const int WALKING_TEXTURE_COLS = 5;
-	const int WALKING_MARIO_START_FRAME = 10;
-	const int WALKING_MARIO_END_FRAME = 14;
+	const int WALKING_TEXTURE_COLS = 6;
+	const int WALKING_MARIO_START_FRAME = 12;
+	const int WALKING_MARIO_END_FRAME = 17;
 	const float WALKING_ANIMATION_DELAY = 0.15f;
 
 	const int ROLLING_IMAGE_WIDTH = 128;
@@ -35,15 +35,36 @@ namespace marioNS
 	const int JUMP_UP_IMAGE_HEIGHT = 256;
 	const int JUMP_UP_TEXTURE_COLS = 6;
 	const int JUMP_UP_MARIO_START_FRAME = 5;
-	const int JUMP_UP_MARIO_END_FRAME = 4;
-	const float JUMP_UP_ANIMATION_DELAY = 1.0f;
+	const int JUMP_UP_MARIO_END_FRAME = 5;
+	const float JUMP_UP_ANIMATION_DELAY = 0.1f;
 
 	const int JUMP_FALL_IMAGE_WIDTH = 256;
 	const int JUMP_FALL_IMAGE_HEIGHT = 256;
 	const int JUMP_FALL_TEXTURE_COLS = 4;
 	const int JUMP_FALL_MARIO_START_FRAME = 3;
 	const int JUMP_FALL_MARIO_END_FRAME = 3;
-	const float JUMP_FALL_ANIMATION_DELAY = 1.0f;
+	const float JUMP_FALL_ANIMATION_DELAY = 0.25f;
+
+	const int HORIZONTAL_ATTACK_IMAGE_WIDTH = 512;
+	const int HORIZONTAL_ATTACK_IMAGE_HEIGHT = 256;
+	const int HORIZONTAL_ATTACK_TEXTURE_COLS = 4;
+	const int HORIZONTAL_ATTACK_START_FRAME = 20;
+	const int HORIZONTAL_ATTACK_END_FRAME = 23;
+	const float HORIZONTAL_ATTACK_ANIMATION_DELAY = 0.1f;
+
+	const int CLAW_ATTACK_IMAGE_WIDTH = 256;
+	const int CLAW_ATTACK_IMAGE_HEIGHT = 256;
+	const int CLAW_ATTACK_TEXTURE_COLS = 4;
+	const int CLAW_ATTACK_START_FRAME = 24;
+	const int CLAW_ATTACK_END_FRAME = 27;
+	const float CLAW_ATTACK_ANIMATION_DELAY = 0.1f;
+
+	const int SHOOT_ATTACK_IMAGE_WIDTH = 256;
+	const int SHOOT_ATTACK_IMAGE_HEIGHT = 256;
+	const int SHOOT_ATTACK_TEXTURE_COLS = 7;
+	const int SHOOT_ATTACK_START_FRAME = 46;
+	const int SHOOT_ATTACK_END_FRAME = 48;
+	const float SHOOT_ATTACK_ANIMATION_DELAY = 0.1f;
 
 	//Collision RECTS      left, top, right, bottom
 	const RECT IDLE_RECT = {-40, -128, 40, 128};
@@ -59,6 +80,9 @@ namespace marioNS
 		WALKING,
 		ROLLING,
 		JUMPING,
+		HORIZONTAL_ATTACK,
+		CLAW_ATTACK,
+		SHOOT_ATTACK
 	};
 
 	enum Direction
@@ -78,6 +102,9 @@ private:
 	Image marioRolling_;
 	Image marioJumpUp_;
 	Image marioJumpFall_;
+	Image horizontalAttack_;
+	Image clawAttack_;
+	Image shootAttack_;
 
 public:
 	// constructor
