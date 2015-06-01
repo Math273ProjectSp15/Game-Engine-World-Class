@@ -88,7 +88,7 @@ private:
 	//Textures
 	TextureManager backgroundTexture_;
 	TextureManager backgroundTexture1_;
-	TextureManager platformTexture_;
+	//TextureManager platformTexture_;
 	//TextureManager groundTexture_;
 
 	// game items

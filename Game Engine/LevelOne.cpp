@@ -25,9 +25,9 @@ void LevelOne::initialize(HWND hwnd)
 	if (!backgroundTexture1_.initialize(graphics, BACKGROUND_LAYER2))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background_ texture"));
 
-	// platform_ texture
-	if (!platformTexture_.initialize(graphics, PLATFORM_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform_ texture"));
+	//// platform_ texture
+	//if (!platformTexture_.initialize(graphics, PLATFORM_IMAGE))
+	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform_ texture"));
 
 	if (!groundTexture_.initialize(graphics, GROUND_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground_ texture"));
@@ -71,8 +71,8 @@ void LevelOne::initialize(HWND hwnd)
 	/*if (!ground_.initialize(this, GROUND_ENTITY_WIDTH, GROUND_ENTITY_HEIGHT, GROUND_ENTITY_COLUMNS, &groundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground entity"));*/
 
-	if (!yellowVillain_.initialize(this, &villainsGroundTexture_))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
+	//if (!yellowVillain_.initialize(this, &villainsGroundTexture_))
+	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
 	yellowVillain_.setX(GAME_WIDTH / 2);
 	yellowVillain_.setY(GAME_HEIGHT / 2);
 
