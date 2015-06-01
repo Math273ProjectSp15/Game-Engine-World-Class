@@ -36,8 +36,6 @@ private:
 	//Textures
 	TextureManager backgroundTexture_;
 	TextureManager backgroundTexture1_;
-	TextureManager platformTexture_;
-	TextureManager groundTexture_;
 
 	//Image objects
 	Image background_;

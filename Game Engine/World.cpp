@@ -24,7 +24,7 @@ void World::initialize(HWND hwnd)
 	if (!marioTexture_.initialize(graphics, DARK_MARIO_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario_ texture"));
 	// Villains texture
-	if (!villainsTexture_.initialize(graphics, VILLAINS_IMAGE))
+	if (!villainsGroundTexture_.initialize(graphics, VILLAINS_AND_GROUND_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario_ texture"));
 	// mario_
 	if (!mario_.initialize(this, marioNS::WIDTH, marioNS::HEIGHT, marioNS::TEXTURE_COLS, &marioTexture_))
@@ -168,7 +168,7 @@ void World::render()      // "
 void World::releaseAll()
 {
 	marioTexture_.onLostDevice();
-	villainsTexture_.onLostDevice();
+	villainsGroundTexture_.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -176,7 +176,7 @@ void World::releaseAll()
 void World::resetAll()
 {
 	marioTexture_.onResetDevice();
-	villainsTexture_.onResetDevice();
+	villainsGroundTexture_.onResetDevice();
 	Game::resetAll();
 	return;
 }

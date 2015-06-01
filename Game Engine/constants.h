@@ -18,11 +18,9 @@
 const char BACKGROUND_IMAGE[] = "pictures\\background.png";
 const char BACKGROUND_LAYER1[] = "pictures\\layer-1-sky.png";
 const char BACKGROUND_LAYER2[] = "pictures\\layer-2-ghosts.png";
-const char GROUND_IMAGE[] = "pictures\\layer-3-ground_125X509.png";
 const char DARK_MARIO_IMAGE[] = "pictures\\DarkMario_2048x2048.png";
 const char MARIO_ATTACK_IMAGE[] = "pictures\\Attacks_1024x2048.png";
-const char PLATFORM_IMAGE[] = "pictures\\Platform.png";
-const char VILLAINS_IMAGE[] = "pictures\\Villains.png";
+const char VILLAINS_AND_GROUND_IMAGE[] = "pictures\\VillainsAndGround.png";
 
 // window
 const char CLASS_NAME[] = "MarioGame";
@@ -45,16 +43,16 @@ const int MAP_HEIGHT = 1536;
 //platform
 const int PLATFORM_WIDTH = 256;
 const int PLATFORM_HEIGHT = 128;
-const int PLATFORM_COLUMNS = 1;
-const int PLATFORM_START_FRAME = 0;
-const int PLATFORM_END_FRAME = 0;
+const int PLATFORM_COLUMNS = 6;
+const int PLATFORM_START_FRAME = 5;
+const int PLATFORM_END_FRAME = 5;
 
 //ground
 const int GROUND_ENTITY_WIDTH = 512;
 const int GROUND_ENTITY_HEIGHT = 128;
-const int GROUND_ENTITY_COLUMNS = 1;
-const int GROUND_ENTITY_START_FRAME = 0;
-const int GROUND_ENTITY_END_FRAME = 0;
+const int GROUND_ENTITY_COLUMNS = 4;
+const int GROUND_ENTITY_START_FRAME = 3;
+const int GROUND_ENTITY_END_FRAME = 3;
 
 const float GROUND_Y_POSITION = GAME_HEIGHT - GROUND_ENTITY_HEIGHT;
 

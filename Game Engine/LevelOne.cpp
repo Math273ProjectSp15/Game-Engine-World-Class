@@ -25,14 +25,6 @@ void LevelOne::initialize(HWND hwnd)
 	if (!backgroundTexture1_.initialize(graphics, BACKGROUND_LAYER2))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background_ texture"));
 
-	// platform_ texture
-	if (!platformTexture_.initialize(graphics, PLATFORM_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform_ texture"));
-
-	//ground_ texture
-	if (!groundTexture_.initialize(graphics, GROUND_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground texture"));
-
 	// background_
 	if (!background_.initialize(graphics, 0, 0, 0, &backgroundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
@@ -44,24 +36,26 @@ void LevelOne::initialize(HWND hwnd)
 
 
 	//Entities
-	if (!platform_.initialize(this, PLATFORM_WIDTH, PLATFORM_HEIGHT, PLATFORM_COLUMNS, &platformTexture_))
+	if (!platform_.initialize(this, PLATFORM_WIDTH, PLATFORM_HEIGHT, PLATFORM_COLUMNS, &villainsGroundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform entity"));
 
-	if (!ground_.initialize(this, GROUND_ENTITY_WIDTH, GROUND_ENTITY_HEIGHT, GROUND_ENTITY_COLUMNS, &groundTexture_))
+	if (!ground_.initialize(this, GROUND_ENTITY_WIDTH, GROUND_ENTITY_HEIGHT, GROUND_ENTITY_COLUMNS, &villainsGroundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground entity"));
 
-	if (!yellowVillain_.initialize(this, &villainsTexture_))
+	if (!yellowVillain_.initialize(this, &villainsGroundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
 	yellowVillain_.setX(GAME_WIDTH / 2);
 	yellowVillain_.setY(GAME_HEIGHT / 2);
 
 	platform_.setFrames(PLATFORM_START_FRAME, PLATFORM_END_FRAME);
+	platform_.setCurrentFrame(PLATFORM_START_FRAME);
 	platform_.setX(mario_.getX() + 250);
 	platform_.setY(GROUND_Y_POSITION - 100);
 	platform_.setEdge(levelOneNS::platformRECT);
 	platform_.setCollisionType(entityNS::BOX);
 
 	ground_.setFrames(GROUND_ENTITY_START_FRAME, GROUND_ENTITY_END_FRAME);
+	ground_.setCurrentFrame(GROUND_ENTITY_START_FRAME);
 	ground_.setX(mario_.getX() - 200);
 	ground_.setY(GROUND_Y_POSITION);
 	ground_.setEdge(levelOneNS::groundRECT);
@@ -99,11 +93,13 @@ void LevelOne::initialize(HWND hwnd)
 void LevelOne::releaseAll()
 {
 	backgroundTexture_.onLostDevice();
+	backgroundTexture1_.onLostDevice();
 	World::releaseAll();
 }
 
 void LevelOne::resetAll()
 {
 	backgroundTexture_.onResetDevice();
+	backgroundTexture1_.onResetDevice();
 	World::resetAll();
 }
