@@ -98,20 +98,24 @@ void World::collisions()  // "
 		if (mario_.collidesWith(*entity, cv))
 		{
 			VECTOR2 standStill = { 0, mario_.getVelocity().y };
-			/*if (mario_.getX() < entity->getX() && mario_.getY() > entity->getY() - mario_.getHeight())
+		    if (mario_.getX() < entity->getX() && mario_.getY() > entity->getY() - mario_.getHeight())
 			{
 				mario_.setX(entity->getX() - mario_.getWidth());
 				mario_.setVelocity(standStill);
 			}
-			else*/
+			else
+			{
 				mario_.setY(entity->getY() - mario_.getHeight());
-			mario_.setVelocity(standStill);
-			mario_.onGround();
-			collisionDetected = true;
+				mario_.setVelocity(standStill);
+				mario_.onGround();
+				collisionDetected = true;
+			}
 		}
 	}
 	if (!collisionDetected)
+	{
 		mario_.notOnGround();
+	}
 }
 
 void World::render()      // "
