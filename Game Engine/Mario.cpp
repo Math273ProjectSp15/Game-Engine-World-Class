@@ -135,6 +135,7 @@ void Mario::update(float frameTime)
 	}
 	else if (getState() == marioNS::ROLLING)
 	{
+
 		spriteData.y = (spriteData.y + getHeight()) - marioNS::ROLLING_IMAGE_HEIGHT;
 		if (getDirection() == marioNS::LEFT)
 		{
@@ -152,7 +153,7 @@ void Mario::update(float frameTime)
 	{
 		if (isOnGround())
 		{
-			velocity.y = -4 * marioNS::SPEED;
+			velocity.y = -6 * marioNS::SPEED;
 			notOnGround();
 		}
 		marioJumpUp_.update(frameTime);
@@ -176,9 +177,13 @@ void Mario::update(float frameTime)
 
 
 	if (!isOnGround())
+	{
 		velocity.y += frameTime * 3 * GRAVITY;
+	}
 	else
+	{
 		velocity.y = 0;
+	}
 }
 
 //=============================================================================

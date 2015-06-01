@@ -41,7 +41,10 @@ void World::initialize(HWND hwnd)
 
 void World::update()      // must override pure virtual from Game
 {
-
+	bool moveLeft = false;
+	bool moveRight = false;
+	bool moveUp = false;
+	bool moveDown = false;
 	if (input->isKeyDown(LEFT_KEY) || input->getGamepadDPadLeft(0))
 	{
 		mario_.setDirection(marioNS::LEFT);
@@ -52,6 +55,7 @@ void World::update()      // must override pure virtual from Game
 			mario_.setState(marioNS::JUMPING);
 			mario_.setEdge(marioNS::JUMP_UP_RECT);
 		}
+		moveRight = true;
 	}
 	else if (input->isKeyDown(RIGHT_KEY) && !input->isKeyDown(DOWN_KEY) || input->getGamepadDPadRight(0))
 	{
@@ -63,6 +67,7 @@ void World::update()      // must override pure virtual from Game
 			mario_.setState(marioNS::JUMPING);
 			mario_.setEdge(marioNS::JUMP_UP_RECT);
 		}
+		moveRight = true;
 	}
 	else if (input->isKeyDown(DOWN_KEY) || input->getGamepadDPadDown(0))
 	{
@@ -73,6 +78,7 @@ void World::update()      // must override pure virtual from Game
 	{
 		mario_.setState(marioNS::JUMPING);
 		mario_.setEdge(marioNS::JUMP_UP_RECT);
+		moveUp = true;
 	}
 	else if (input->isKeyDown(F_KEY))
 	{
@@ -93,7 +99,26 @@ void World::update()      // must override pure virtual from Game
 	}
 	mario_.update(frameTime);
 	villains_[0]->update(frameTime);
-	updateScroll();
+	if (moveUp && !marioStuckOnTop_)
+	{
+		updateScroll();
+	}
+	if (moveDown && !marioStuckOnBottom_)
+	{
+		updateScroll();
+	}
+	if (moveRight && !marioStuckOnRight_)
+	{
+		updateScroll();
+	}
+	if (moveLeft && !marioStuckOnLeft_)
+	{
+		updateScroll();
+	}
+	marioStuckOnTop_ = false;
+	marioStuckOnBottom_ = false;
+	marioStuckOnRight_ = false;
+	marioStuckOnLeft_ = false;
 }
 
 void World::ai()          // "
@@ -104,22 +129,36 @@ void World::ai()          // "
 void World::collisions()  // "
 {
 	bool collisionDetected = false;
-	for (auto entity : entities_)
+	for (int i = 0; i < entities_.size(); i++)
 	{
-		VECTOR2 cv ;
-		if (mario_.collidesWith(*entity, cv))
+		VECTOR2 cv;
+		if (mario_.collidesWith(*entities_[i], cv))
 		{
 			VECTOR2 standStill = { 0, mario_.getVelocity().y };
-		    if (mario_.getX() < entity->getX() && mario_.getY() > entity->getY() - mario_.getHeight())
+			if (mario_.getX() < entities_[i]->getX() - mario_.getWidth() && mario_.getY() > entities_[i]->getY() - mario_.getHeight())
 			{
-				mario_.setX(entity->getX() - mario_.getWidth());
+				mario_.setX(entities_[i]->getX() - mario_.getWidth());
 				mario_.setVelocity(standStill);
+				marioStuckOnLeft_ = true;
 			}
+			else if (mario_.getX() > entities_[i]->getX() + entities_[i]->getWidth() && mario_.getY() > entities_[i]->getY() - mario_.getHeight())
+			{
+				mario_.setX(entities_[i]->getX() + entities_[i]->getWidth());
+				mario_.setVelocity(standStill);
+				marioStuckOnRight_ = true;
+			}
+			/*else if (mario_.getX() > entities_[i]->getX() + entities_[i]->getWidth() + mario_.getWidth() / 2 
+				&& mario_.getX() > entities_[i]->getX() + entities_[i]->getWidth() + mario_.getWidth() / 2
+				&& mario_.getY() > entities_[i]->getY() - mario_.getHeight())
+			{
+
+			}*/
 			else
 			{
-				mario_.setY(entity->getY() - mario_.getHeight());
+				mario_.setY(entities_[i]->getY() - mario_.getHeight());
 				mario_.setVelocity(standStill);
 				mario_.onGround();
+				marioStuckOnBottom_ = true;
 				collisionDetected = true;
 			}
 		}
@@ -134,7 +173,6 @@ void World::render()      // "
 {
 	graphics->spriteBegin();                // begin drawing sprites
 
-
 	if (!backgroundImages_.empty())
 	{
 		for (auto background : backgroundImages_)
@@ -142,7 +180,6 @@ void World::render()      // "
 			background->draw();
 		}
 	}
-
 
 	mario_.draw();                          // add mario to the scene
 
@@ -223,9 +260,6 @@ void World::updateScroll()
 	{
 		mario_.setX(mario_.getX() + frameTime * mario_.getVelocity().x);
 	}
-
-
-
 }
 
 void World::resetMarioPosition()

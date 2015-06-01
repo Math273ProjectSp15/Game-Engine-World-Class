@@ -68,11 +68,10 @@ namespace marioNS
 
 	//Collision RECTS      left, top, right, bottom
 	const RECT IDLE_RECT = {-40, -128, 40, 128};
-	//const RECT RUN_RECT = {-94, -128, 94, 128};
 	const RECT RUN_RECT = { -40, -128, 40, 128 };
 	const RECT JUMP_UP_RECT = {-64, -128, 64, 128};
 	const RECT JUMP_FALL_RECT = {-79, -128, 79, 128};
-	const RECT ROLLING_RECT = {-64, -29, 64, 64};
+	const RECT ROLLING_RECT = {-64, -29, 64, 29};
 
 	enum State
 	{

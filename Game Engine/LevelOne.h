@@ -106,14 +106,11 @@ private:
 	Image background1_;
 
 	//Entity Objects
-	Entity platform_;
-
-	/*Entity ground_;*/
+	//Entity platform_;
 	std::vector <Entity> ground_;
 	std::vector <Entity> airground_;
 	Entity lava_;
 	Entity spike_;
 	
-
 	PurpleVillain yellowVillain_;
 };

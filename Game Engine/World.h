@@ -32,6 +32,11 @@ protected:
 	//This is the entity for the main character of the game (Mario)
 	//Need this for collision detection within World
 	Mario mario_;
+	bool marioStuckOnLeft_;
+	bool marioStuckOnRight_;
+	bool marioStuckOnTop_;
+	bool marioStuckOnBottom_;
+
 	TextureManager marioTexture_;
 	//Marios position in World
 	VECTOR2	marioPositionVector_;

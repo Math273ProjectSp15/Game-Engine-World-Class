@@ -104,7 +104,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!ground_[1].initialize(this, 0, 0, 0, &groundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground1 texture"));
-	ground_[1].setCollisionType(entityNS::ROTATED_BOX);
+	ground_[1].setCollisionType(entityNS::BOX);
 	ground_[1].setEdge(levelOneNS::GROUND_EDGE);
 	// Set position
 	ground_[1].setX(levelOneNS::GROUND2_X);
@@ -113,7 +113,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!ground_[2].initialize(this, 0, 0, 0, &ground1Texture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground2 texture"));
-	ground_[2].setCollisionType(entityNS::ROTATED_BOX);
+	ground_[2].setCollisionType(entityNS::BOX);
 	ground_[2].setEdge(levelOneNS::GROUND1_EDGE);
 	// Set position
 	ground_[2].setX(levelOneNS::GROUND3_X);
@@ -123,7 +123,7 @@ void LevelOne::initialize(HWND hwnd)
 	//initialize lava
 	if (!lava_.initialize(this, 0, 0, 0, &lavaTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing lava texture"));
-	lava_.setCollisionType(entityNS::ROTATED_BOX);
+	lava_.setCollisionType(entityNS::BOX);
 	lava_.setEdge(levelOneNS::LAVA_EDGE);
 	// Set position
 	lava_.setX(levelOneNS::LAVA_X);
@@ -133,7 +133,7 @@ void LevelOne::initialize(HWND hwnd)
 	//initialize spike
 	if (!spike_.initialize(this, 0, 0, 0, &spikeTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing spike texture"));
-	spike_.setCollisionType(entityNS::ROTATED_BOX);
+	spike_.setCollisionType(entityNS::BOX);
 	spike_.setEdge(levelOneNS::SPIKE_EDGE);
 	// Set position
 	spike_.setX(levelOneNS::SPIKE_X);
@@ -145,7 +145,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!airground_[0].initialize(this, 0, 0, 0, &airground1Texture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground1 texture"));
-	airground_[0].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[0].setCollisionType(entityNS::BOX);
 	airground_[0].setEdge(levelOneNS::AIRGROUND1_EDGE);
 	// Set position
 	airground_[0].setX(levelOneNS::AIRGROUND1_X);
@@ -154,7 +154,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!airground_[1].initialize(this, 0, 0, 0, &airground1Texture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground1 texture"));
-	airground_[1].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[1].setCollisionType(entityNS::BOX);
 	airground_[1].setEdge(levelOneNS::AIRGROUND1_EDGE);
 	// Set position
 	airground_[1].setX(levelOneNS::AIRGROUND2_X);
@@ -163,7 +163,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!airground_[2].initialize(this, 0, 0, 0, &airground2Texture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground2 texture"));
-	airground_[2].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[2].setCollisionType(entityNS::BOX);
 	airground_[2].setEdge(levelOneNS::AIRGROUND2_EDGE);
 	// Set position
 	airground_[2].setX(levelOneNS::AIRGROUND3_X);
@@ -172,7 +172,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!airground_[3].initialize(this, 0, 0, 0, &airground3Texture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground3 texture"));
-	airground_[3].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[3].setCollisionType(entityNS::BOX);
 	airground_[3].setEdge(levelOneNS::AIRGROUND3_EDGE);
 	// Set position
 	airground_[3].setX(levelOneNS::AIRGROUND4_X);
@@ -181,7 +181,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!airground_[4].initialize(this, 0, 0, 0, &airground1Texture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground4 texture"));
-	airground_[4].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[4].setCollisionType(entityNS::BOX);
 	airground_[4].setEdge(levelOneNS::AIRGROUND1_EDGE);
 	// Set position
 	airground_[4].setX(levelOneNS::AIRGROUND5_X);
