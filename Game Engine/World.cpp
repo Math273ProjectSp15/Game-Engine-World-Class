@@ -174,6 +174,10 @@ void World::updateScroll()
 {
 	double scrollX = frameTime * mario_.getVelocity().x;
 	double scrollY = frameTime * mario_.getVelocity().y;
+
+	if (mario_.isDead())
+		resetMarioPosition();
+
 	marioPositionVector_.x += scrollX;
 	marioPositionVector_.y += scrollY;
 
@@ -215,5 +219,6 @@ void World::updateScroll()
 void World::resetMarioPosition()
 {
 	marioPositionVector_ = marioInitialPositionVector_;
+	mario_.marioUndead();
 	mario_.resetMario();
 }
