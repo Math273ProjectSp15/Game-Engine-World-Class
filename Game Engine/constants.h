@@ -18,7 +18,6 @@
 const char BACKGROUND_IMAGE[] = "pictures\\background.png";
 const char BACKGROUND_LAYER1[] = "pictures\\layer-1-sky.png";
 const char BACKGROUND_LAYER2[] = "pictures\\layer-2-ghosts.png";
-//const char GROUND_IMAGE[] = "pictures\\layer-3-ground_125X509.png";
 const char DARK_MARIO_IMAGE[] = "pictures\\DarkMario_2048x2048.png";
 const char MARIO_ATTACK_IMAGE[] = "pictures\\Attacks_1024x2048.png";
 const char PLATFORM_IMAGE[] = "pictures\\Platform.png";
@@ -30,7 +29,7 @@ const char SPIKE_IMAGE[] = "pictures\\spike.png";
 const char AIR_GROUND1_IMAGE[] = "pictures\\airground1.png";
 const char AIR_GROUND2_IMAGE[] = "pictures\\airground2.png";
 const char AIR_GROUND3_IMAGE[] = "pictures\\airground3.png";
-const char VILLAINS_AND_GROUND_IMAGE[] = "pictures\\VillainsAndGround.png";
+//const char VILLAINS_AND_GROUND_IMAGE[] = "pictures\\VillainsAndGround.png";
 
 
 // window
