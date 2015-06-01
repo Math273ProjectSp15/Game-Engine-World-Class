@@ -38,7 +38,6 @@ bool Mario::initialize(Game *gamePtr, int width, int height, int ncols,
 {
 	marioWalking_.initialize(gamePtr->getGraphics(), marioNS::WALKING_IMAGE_WIDTH, 
 		marioNS::WALKING_IMAGE_HEIGHT, marioNS::WALKING_TEXTURE_COLS, textureM);
-
 	marioWalking_.setFrames(marioNS::WALKING_MARIO_START_FRAME, marioNS::WALKING_MARIO_END_FRAME);
 	marioWalking_.setCurrentFrame(marioNS::WALKING_MARIO_START_FRAME);
 	marioWalking_.setFrameDelay(marioNS::WALKING_ANIMATION_DELAY);
@@ -60,6 +59,24 @@ bool Mario::initialize(Game *gamePtr, int width, int height, int ncols,
 	marioJumpFall_.setFrames(marioNS::JUMP_FALL_MARIO_START_FRAME, marioNS::JUMP_FALL_MARIO_END_FRAME);
 	marioJumpFall_.setCurrentFrame(marioNS::JUMP_FALL_MARIO_START_FRAME);
 	marioJumpFall_.setFrameDelay(marioNS::JUMP_FALL_ANIMATION_DELAY);
+
+	horizontalAttack_.initialize(gamePtr->getGraphics(), marioNS::HORIZONTAL_ATTACK_IMAGE_WIDTH, 
+		marioNS::HORIZONTAL_ATTACK_IMAGE_HEIGHT, marioNS::HORIZONTAL_ATTACK_TEXTURE_COLS, textureM);
+	horizontalAttack_.setFrames(marioNS::HORIZONTAL_ATTACK_START_FRAME, marioNS::HORIZONTAL_ATTACK_END_FRAME);
+	horizontalAttack_.setCurrentFrame(marioNS::HORIZONTAL_ATTACK_START_FRAME);
+	horizontalAttack_.setFrameDelay(marioNS::HORIZONTAL_ATTACK_ANIMATION_DELAY);
+
+	clawAttack_.initialize(gamePtr->getGraphics(), marioNS::CLAW_ATTACK_IMAGE_WIDTH,
+		marioNS::CLAW_ATTACK_IMAGE_HEIGHT, marioNS::CLAW_ATTACK_TEXTURE_COLS, textureM);
+	clawAttack_.setFrames(marioNS::CLAW_ATTACK_START_FRAME, marioNS::CLAW_ATTACK_END_FRAME);
+	clawAttack_.setCurrentFrame(marioNS::CLAW_ATTACK_START_FRAME);
+	clawAttack_.setFrameDelay(marioNS::CLAW_ATTACK_ANIMATION_DELAY);
+
+	shootAttack_.initialize(gamePtr->getGraphics(), marioNS::SHOOT_ATTACK_IMAGE_WIDTH,
+		marioNS::SHOOT_ATTACK_IMAGE_HEIGHT, marioNS::SHOOT_ATTACK_TEXTURE_COLS, textureM);
+	shootAttack_.setFrames(marioNS::SHOOT_ATTACK_START_FRAME, marioNS::SHOOT_ATTACK_END_FRAME);
+	shootAttack_.setCurrentFrame(marioNS::SHOOT_ATTACK_START_FRAME);
+	shootAttack_.setFrameDelay(marioNS::SHOOT_ATTACK_ANIMATION_DELAY);
 
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
@@ -96,7 +113,7 @@ void Mario::update(float frameTime)
 
 	if (getState() == marioNS::IDLEING)
 	{
-		setFrames(marioNS::IDLE_MARIO_START_FRAME, marioNS::IDLE_MARIO_END_FRAME);
+		//setFrames(marioNS::IDLE_MARIO_START_FRAME, marioNS::IDLE_MARIO_END_FRAME);
 		//if (spriteData.y == GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT)
 		//{
 		//	velocity.x = 0;
@@ -138,11 +155,26 @@ void Mario::update(float frameTime)
 			velocity.y = -4 * marioNS::SPEED;
 			notOnGround();
 		}
+		marioJumpUp_.update(frameTime);
 		//if (spriteData.y == GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT)
 		//{
 		//	velocity.y = -4 * marioNS::SPEED;
 		//}
 	}
+	else if (getState() == marioNS::HORIZONTAL_ATTACK)
+	{
+		horizontalAttack_.update(frameTime);
+	}
+	else if (getState() == marioNS::CLAW_ATTACK)
+	{
+		clawAttack_.update(frameTime);
+	}
+	else if (getState() == marioNS::SHOOT_ATTACK)
+	{
+		shootAttack_.update(frameTime);
+	}
+
+
 	if (!isOnGround())
 		velocity.y += frameTime * 3 * GRAVITY;
 	else
@@ -168,6 +200,18 @@ void Mario::draw()
 			marioJumpUp_.draw(spriteData);
 		else
 			marioJumpFall_.draw(spriteData);
+	}
+	else if (state_ == marioNS::HORIZONTAL_ATTACK)
+	{
+		horizontalAttack_.draw(spriteData);
+	}
+	else if (state_ == marioNS::CLAW_ATTACK)
+	{
+		clawAttack_.draw(spriteData);
+	}
+	else if (state_ == marioNS::SHOOT_ATTACK)
+	{
+		shootAttack_.draw(spriteData);
 	}
 	else
 	{

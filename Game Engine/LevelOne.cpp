@@ -29,9 +29,30 @@ void LevelOne::initialize(HWND hwnd)
 	if (!platformTexture_.initialize(graphics, PLATFORM_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform_ texture"));
 
-	//ground_ texture
 	if (!groundTexture_.initialize(graphics, GROUND_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground_ texture"));
+
+	if (!ground1Texture_.initialize(graphics, GROUND1_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground1_ texture"));
+
+	if (!lavaTexture_.initialize(graphics, LAVA_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing lava_ texture"));
+
+	if (!spikeTexture_.initialize(graphics, SPIKE_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing spike_ texture"));
+
+	if (!airground1Texture_.initialize(graphics, AIR_GROUND1_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground1_ texture"));
+
+	if (!airground2Texture_.initialize(graphics, AIR_GROUND2_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground2_ texture"));
+
+	if (!airground3Texture_.initialize(graphics, AIR_GROUND3_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airgound3_ texture"));
+
+	//ground_ texture
+	/*if (!groundTexture_.initialize(graphics, GROUND_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground texture"));*/
 
 	// background_
 	if (!background_.initialize(graphics, 0, 0, 0, &backgroundTexture_))
@@ -44,18 +65,18 @@ void LevelOne::initialize(HWND hwnd)
 
 
 	//Entities
-	if (!platform_.initialize(this, PLATFORM_WIDTH, PLATFORM_HEIGHT, PLATFORM_COLUMNS, &platformTexture_))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform entity"));
+	/*if (!platform_.initialize(this, PLATFORM_WIDTH, PLATFORM_HEIGHT, PLATFORM_COLUMNS, &platformTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform entity"));*/
 
-	if (!ground_.initialize(this, GROUND_ENTITY_WIDTH, GROUND_ENTITY_HEIGHT, GROUND_ENTITY_COLUMNS, &groundTexture_))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground entity"));
+	/*if (!ground_.initialize(this, GROUND_ENTITY_WIDTH, GROUND_ENTITY_HEIGHT, GROUND_ENTITY_COLUMNS, &groundTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground entity"));*/
 
 	if (!yellowVillain_.initialize(this, &villainsTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
 	yellowVillain_.setX(GAME_WIDTH / 2);
 	yellowVillain_.setY(GAME_HEIGHT / 2);
 
-	platform_.setFrames(PLATFORM_START_FRAME, PLATFORM_END_FRAME);
+	/*platform_.setFrames(PLATFORM_START_FRAME, PLATFORM_END_FRAME);
 	platform_.setX(mario_.getX() + 250);
 	platform_.setY(GROUND_Y_POSITION - 100);
 	platform_.setEdge(levelOneNS::platformRECT);
@@ -65,10 +86,108 @@ void LevelOne::initialize(HWND hwnd)
 	ground_.setX(mario_.getX() - 200);
 	ground_.setY(GROUND_Y_POSITION);
 	ground_.setEdge(levelOneNS::groundRECT);
-	ground_.setCollisionType(entityNS::BOX);
+	ground_.setCollisionType(entityNS::BOX);*/
 
-	entities_.push_back(&platform_);
-	entities_.push_back(&ground_);
+	/*entities_.push_back(&platform_);
+	entities_.push_back(&ground_);*/
+
+	//initialize ground
+	ground_.resize(3);
+	if (!ground_[0].initialize(this, 0, 0, 0, &groundTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground0 texture"));
+	ground_[0].setCollisionType(entityNS::BOX);
+	ground_[0].setEdge(levelOneNS::GROUND_EDGE);
+	// Set position
+	ground_[0].setX(levelOneNS::GROUND1_X);
+	ground_[0].setY(levelOneNS::GROUND_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&ground_[0]);
+
+	if (!ground_[1].initialize(this, 0, 0, 0, &groundTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground1 texture"));
+	ground_[1].setCollisionType(entityNS::ROTATED_BOX);
+	ground_[1].setEdge(levelOneNS::GROUND_EDGE);
+	// Set position
+	ground_[1].setX(levelOneNS::GROUND2_X);
+	ground_[1].setY(levelOneNS::GROUND_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&ground_[1]);
+
+	if (!ground_[2].initialize(this, 0, 0, 0, &ground1Texture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground2 texture"));
+	ground_[2].setCollisionType(entityNS::ROTATED_BOX);
+	ground_[2].setEdge(levelOneNS::GROUND1_EDGE);
+	// Set position
+	ground_[2].setX(levelOneNS::GROUND3_X);
+	ground_[2].setY(levelOneNS::GROUND_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&ground_[2]);
+
+	//initialize lava
+	if (!lava_.initialize(this, 0, 0, 0, &lavaTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing lava texture"));
+	lava_.setCollisionType(entityNS::ROTATED_BOX);
+	lava_.setEdge(levelOneNS::LAVA_EDGE);
+	// Set position
+	lava_.setX(levelOneNS::LAVA_X);
+	lava_.setY(levelOneNS::LAVA_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&lava_);
+
+	//initialize spike
+	if (!spike_.initialize(this, 0, 0, 0, &spikeTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing spike texture"));
+	spike_.setCollisionType(entityNS::ROTATED_BOX);
+	spike_.setEdge(levelOneNS::SPIKE_EDGE);
+	// Set position
+	spike_.setX(levelOneNS::SPIKE_X);
+	spike_.setY(levelOneNS::SPIKE_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&spike_);
+
+	//initialize airground
+	airground_.resize(5);
+
+	if (!airground_[0].initialize(this, 0, 0, 0, &airground1Texture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground1 texture"));
+	airground_[0].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[0].setEdge(levelOneNS::AIRGROUND1_EDGE);
+	// Set position
+	airground_[0].setX(levelOneNS::AIRGROUND1_X);
+	airground_[0].setY(levelOneNS::AIRGROUND1_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&airground_[0]);
+
+	if (!airground_[1].initialize(this, 0, 0, 0, &airground1Texture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground1 texture"));
+	airground_[1].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[1].setEdge(levelOneNS::AIRGROUND1_EDGE);
+	// Set position
+	airground_[1].setX(levelOneNS::AIRGROUND2_X);
+	airground_[1].setY(levelOneNS::AIRGROUND2_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&airground_[1]);
+
+	if (!airground_[2].initialize(this, 0, 0, 0, &airground2Texture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground2 texture"));
+	airground_[2].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[2].setEdge(levelOneNS::AIRGROUND2_EDGE);
+	// Set position
+	airground_[2].setX(levelOneNS::AIRGROUND3_X);
+	airground_[2].setY(levelOneNS::AIRGROUND3_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&airground_[2]);
+
+	if (!airground_[3].initialize(this, 0, 0, 0, &airground3Texture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground3 texture"));
+	airground_[3].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[3].setEdge(levelOneNS::AIRGROUND3_EDGE);
+	// Set position
+	airground_[3].setX(levelOneNS::AIRGROUND4_X);
+	airground_[3].setY(levelOneNS::AIRGROUND4_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&airground_[3]);
+
+	if (!airground_[4].initialize(this, 0, 0, 0, &airground1Texture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground4 texture"));
+	airground_[4].setCollisionType(entityNS::ROTATED_BOX);
+	airground_[4].setEdge(levelOneNS::AIRGROUND1_EDGE);
+	// Set position
+	airground_[4].setX(levelOneNS::AIRGROUND5_X);
+	airground_[4].setY(levelOneNS::AIRGROUND5_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	entities_.push_back(&airground_[4]);
+
 	villains_.push_back(&yellowVillain_);
 
 	//Fill World containers with references to Image and Entity objects.

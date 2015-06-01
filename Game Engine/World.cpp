@@ -69,10 +69,22 @@ void World::update()      // must override pure virtual from Game
 		mario_.setState(marioNS::ROLLING);
 		mario_.setEdge(marioNS::ROLLING_RECT);
 	}
-	else if (input->isKeyDown(UP_KEY) || input->getGamepadDPadUp(0))
+	else if (input->isKeyDown(UP_KEY) )
 	{
 		mario_.setState(marioNS::JUMPING);
 		mario_.setEdge(marioNS::JUMP_UP_RECT);
+	}
+	else if (input->isKeyDown(F_KEY))
+	{
+		mario_.setState(marioNS::HORIZONTAL_ATTACK);
+	}
+	else if (input->isKeyDown(D_KEY))
+	{
+		mario_.setState(marioNS::CLAW_ATTACK);
+	}
+	else if (input->isKeyDown(S_KEY))
+	{
+		mario_.setState(marioNS::SHOOT_ATTACK);
 	}
 	else
 	{
@@ -98,20 +110,24 @@ void World::collisions()  // "
 		if (mario_.collidesWith(*entity, cv))
 		{
 			VECTOR2 standStill = { 0, mario_.getVelocity().y };
-			/*if (mario_.getX() < entity->getX() && mario_.getY() > entity->getY() - mario_.getHeight())
+		    if (mario_.getX() < entity->getX() && mario_.getY() > entity->getY() - mario_.getHeight())
 			{
 				mario_.setX(entity->getX() - mario_.getWidth());
 				mario_.setVelocity(standStill);
 			}
-			else*/
+			else
+			{
 				mario_.setY(entity->getY() - mario_.getHeight());
-			mario_.setVelocity(standStill);
-			mario_.onGround();
-			collisionDetected = true;
+				mario_.setVelocity(standStill);
+				mario_.onGround();
+				collisionDetected = true;
+			}
 		}
 	}
 	if (!collisionDetected)
+	{
 		mario_.notOnGround();
+	}
 }
 
 void World::render()      // "
