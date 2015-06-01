@@ -71,7 +71,7 @@ void LevelOne::initialize(HWND hwnd)
 	/*if (!ground_.initialize(this, GROUND_ENTITY_WIDTH, GROUND_ENTITY_HEIGHT, GROUND_ENTITY_COLUMNS, &groundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground entity"));*/
 
-	if (!yellowVillain_.initialize(this, &villainsTexture_))
+	if (!yellowVillain_.initialize(this, &villainsGroundTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
 	yellowVillain_.setX(GAME_WIDTH / 2);
 	yellowVillain_.setY(GAME_HEIGHT / 2);
@@ -83,6 +83,7 @@ void LevelOne::initialize(HWND hwnd)
 	platform_.setCollisionType(entityNS::BOX);
 
 	ground_.setFrames(GROUND_ENTITY_START_FRAME, GROUND_ENTITY_END_FRAME);
+	ground_.setCurrentFrame(GROUND_ENTITY_START_FRAME);
 	ground_.setX(mario_.getX() - 200);
 	ground_.setY(GROUND_Y_POSITION);
 	ground_.setEdge(levelOneNS::groundRECT);
@@ -218,11 +219,13 @@ void LevelOne::initialize(HWND hwnd)
 void LevelOne::releaseAll()
 {
 	backgroundTexture_.onLostDevice();
+	backgroundTexture1_.onLostDevice();
 	World::releaseAll();
 }
 
 void LevelOne::resetAll()
 {
 	backgroundTexture_.onResetDevice();
+	backgroundTexture1_.onResetDevice();
 	World::resetAll();
 }
