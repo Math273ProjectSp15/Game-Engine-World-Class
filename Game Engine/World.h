@@ -12,7 +12,8 @@
 #include "Mario.h"
 
 
-struct WINDOWRECT {
+struct WINDOWRECT 
+{
 	double left;
 	double right;
 	double top;
