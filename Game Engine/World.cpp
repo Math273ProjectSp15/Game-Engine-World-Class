@@ -28,7 +28,7 @@ void World::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario_ texture"));
 	// mario_
 	if (!mario_.initialize(this, marioNS::WIDTH, marioNS::HEIGHT, marioNS::TEXTURE_COLS, &marioTexture_))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario entity"));
 
 	mario_.setFrames(marioNS::IDLE_MARIO_START_FRAME, marioNS::IDLE_MARIO_END_FRAME);
 	mario_.setCurrentFrame(marioNS::IDLE_MARIO_START_FRAME);
@@ -135,13 +135,17 @@ void World::collisions()  // "
 		if (mario_.collidesWith(*entities_[i], cv))
 		{
 			VECTOR2 standStill = { 0, mario_.getVelocity().y };
-			if (mario_.getX() < entities_[i]->getX() - mario_.getWidth() && mario_.getY() > entities_[i]->getY() - mario_.getHeight())
+			if (mario_.getX() < entities_[i]->getX() - mario_.getWidth() 
+				&& mario_.getY() > entities_[i]->getY() - mario_.getHeight() 
+				&& mario_.getY() < entities_[i]->getY() + entities_[i]->getHeight())
 			{
 				mario_.setX(entities_[i]->getX() - mario_.getWidth());
 				mario_.setVelocity(standStill);
 				marioStuckOnLeft_ = true;
 			}
-			else if (mario_.getX() > entities_[i]->getX() + entities_[i]->getWidth() && mario_.getY() > entities_[i]->getY() - mario_.getHeight())
+			else if (mario_.getX() > entities_[i]->getX() + entities_[i]->getWidth() 
+				&& mario_.getY() > entities_[i]->getY() - mario_.getHeight()
+				&& mario_.getY() < entities_[i]->getY() + entities_[i]->getHeight())
 			{
 				mario_.setX(entities_[i]->getX() + entities_[i]->getWidth());
 				mario_.setVelocity(standStill);
