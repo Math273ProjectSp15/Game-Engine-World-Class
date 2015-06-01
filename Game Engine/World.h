@@ -61,6 +61,7 @@ protected:
 	void resetMarioPosition();
 
 	int distanceToRightEdge;
+	int distanceToTopEdge;
 public:
 	//World() {};
 	World();
