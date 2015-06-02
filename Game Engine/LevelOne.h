@@ -12,8 +12,6 @@ namespace levelOneNS
 {
 	const int worldWidth = 3072;
 	const int worldHeight = 1536;
-	const int marioInitialPositionX = GAME_WIDTH/2 - marioNS::WIDTH;
-	const int marioInitialPositionY = 200;//(float)GAME_HEIGHT - GROUND_HEIGHT - marioNS::HEIGHT - 30.0;
 	
 	//							left, top, right, bottom
 	//const RECT platformRECT = { -PLATFORM_WIDTH / 2, -PLATFORM_HEIGHT / 2, PLATFORM_WIDTH / 2, PLATFORM_HEIGHT / 2 };
@@ -51,7 +49,7 @@ namespace levelOneNS
 
 	//Spike Position
 	const float SPIKE_X = 73 * 32;
-	const float SPIKE_Y = 45 * 32;
+	const float SPIKE_Y = 44 * 32;
 
 	//Air Ground Position
 	const float AIRGROUND1_X = 26 * 32;
@@ -68,6 +66,10 @@ namespace levelOneNS
 
 	const float AIRGROUND5_X = 85 * 32;
 	const float AIRGROUND5_Y = 15 * 32;
+
+	//Initial Position for mario
+	const int marioInitialPositionX = 200;
+	const int marioInitialPositionY = 352;
 }
 
 class LevelOne : public World
@@ -88,6 +90,7 @@ private:
 	//Textures
 	TextureManager backgroundTexture_;
 	TextureManager backgroundTexture1_;
+	TextureManager backgroundTexture2_;
 
 	// game items
 	TextureManager marioTexture_;     // mario texture
@@ -102,11 +105,10 @@ private:
 	//Image objects
 	Image background_;
 	Image background1_;
+	Image background2_;
 
 	//Entity Objects
 	//Entity platform_;
-	std::vector <Entity> ground_;
-	std::vector <Entity> airground_;
 	Entity lava_;
 	Entity spike_;
 	

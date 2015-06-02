@@ -58,13 +58,18 @@ protected:
 	//Image background for background layers.
 	std::vector<Image*> backgroundImages_;
 
+	std::vector <Entity> ground_;
+	std::vector <Entity> airground_;
+
 	//Set scrollVector_ so that mario_ is centered in the window unless at the edges of the map
 	void updateScroll();
-
 	void resetMarioPosition();
 
 	int distanceToRightEdge;
 	int distanceToTopEdge;
+
+	bool withinHorizonalScroll_;
+	bool withinVerticalScroll_;
 
 	//Text used for debugging
 	TextDX *dxFont_;

@@ -90,7 +90,6 @@ bool Mario::initialize(Game *gamePtr, int width, int height, int ncols,
 void Mario::update(float frameTime)
 {
 	Entity::update(frameTime);
-	spriteData.y += velocity.y * frameTime;
 
 	// Bounce off walls
 	if (spriteData.x > GAME_WIDTH)  // if hit right map edge
@@ -98,18 +97,17 @@ void Mario::update(float frameTime)
 		spriteData.x = GAME_WIDTH;
 		velocity.x = 0;
 	} 
-	else if (spriteData.x < 50)                       // else if hit left map edge
+	else if (spriteData.x < 0)                       // else if hit left map edge
 	{
-		spriteData.x = 50;
+		spriteData.x = 0;
 		velocity.x = 0;
-		velocity.y = 0;
 	}
-	else if (spriteData.y > GROUND_Y_POSITION) // else if below ground
-	{
-	//	spriteData.y = GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT;
-	//	onGround();
-		marioDied();
-	}
+	//else if (spriteData.y > GROUND_Y_POSITION) // else if below ground
+	//{
+	//	//spriteData.y = GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT;
+	//	//onGround();
+	//	//marioDied();
+	//}
 
 	if (getState() == marioNS::IDLEING)
 	{
@@ -135,8 +133,6 @@ void Mario::update(float frameTime)
 	}
 	else if (getState() == marioNS::ROLLING)
 	{
-
-		spriteData.y = (spriteData.y + getHeight()) - marioNS::ROLLING_IMAGE_HEIGHT;
 		if (getDirection() == marioNS::LEFT)
 		{
 			flipHorizontal(true);
@@ -156,11 +152,8 @@ void Mario::update(float frameTime)
 			velocity.y = -6 * marioNS::SPEED;
 			notOnGround();
 		}
-		marioJumpUp_.update(frameTime);
-		//if (spriteData.y == GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT)
-		//{
-		//	velocity.y = -4 * marioNS::SPEED;
-		//}
+		//marioJumpUp_.update(frameTime);
+
 	}
 	else if (getState() == marioNS::HORIZONTAL_ATTACK)
 	{
@@ -184,6 +177,8 @@ void Mario::update(float frameTime)
 	{
 		velocity.y = 0;
 	}
+
+	spriteData.y += velocity.y * frameTime;
 }
 
 //=============================================================================

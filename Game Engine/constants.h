@@ -18,6 +18,7 @@
 const char BACKGROUND_IMAGE[] = "pictures\\background.png";
 const char BACKGROUND_LAYER1[] = "pictures\\layer-1-sky.png";
 const char BACKGROUND_LAYER2[] = "pictures\\layer-2-ghosts.png";
+const char BACKGROUND_LAYER3[] = "pictures\\Layer-5.png";
 const char DARK_MARIO_IMAGE[] = "pictures\\DarkMario_2048x2048.png";
 const char MARIO_ATTACK_IMAGE[] = "pictures\\Attacks_1024x2048.png";
 const char PLATFORM_IMAGE[] = "pictures\\Platform.png";

@@ -45,6 +45,8 @@ void World::initialize(HWND hwnd)
 	mario_.setX(marioPositionVector_.x);
 	mario_.setEdge(marioNS::IDLE_RECT);
 
+	withinHorizonalScroll_ = false;
+	withinVerticalScroll_ = false;
 	distanceToRightEdge = worldWidth_ - (GAME_WIDTH / 2);
 	distanceToTopEdge = (GAME_HEIGHT/2) - worldHeight_;
 	marioPositionVector_.y = 0;
@@ -110,27 +112,30 @@ void World::update()      // must override pure virtual from Game
 	}
 	mario_.update(frameTime);
 	villains_[0]->update(frameTime);
-	updateScroll();
-	//if (moveUp && !marioStuckOnTop_)
-	//{
-	//	updateScroll();
-	//}
-	//if (moveDown && !marioStuckOnBottom_)
-	//{
-	//	updateScroll();
-	//}
-	//if (moveRight && !marioStuckOnRight_)
-	//{
-	//	updateScroll();
-	//}
-	//if (moveLeft && !marioStuckOnLeft_)
-	//{
-	//	updateScroll();
-	//}
-	//marioStuckOnTop_ = false;
-	//marioStuckOnBottom_ = false;
-	//marioStuckOnRight_ = false;
-	//marioStuckOnLeft_ = false;
+
+	if (moveUp && !marioStuckOnTop_)
+	{
+		updateScroll();
+	}
+	else if (moveDown && !marioStuckOnBottom_)
+	{
+		updateScroll();
+	}
+	else if (moveRight && !marioStuckOnRight_)
+	{
+		updateScroll();
+	}
+	else if (moveLeft && !marioStuckOnLeft_)
+	{
+		updateScroll();
+	}
+	else
+		updateScroll();
+
+	marioStuckOnTop_ = false;
+	marioStuckOnBottom_ = false;
+	marioStuckOnRight_ = false;
+	marioStuckOnLeft_ = false;
 
 }
 
@@ -256,14 +261,21 @@ void World::resetAll()
 
 void World::updateScroll()
 {
+
 	double scrollX = frameTime * mario_.getVelocity().x;
-	double scrollY = frameTime * mario_.getVelocity().y;
+	double scrollY = mario_.getY() - GAME_HEIGHT / 2;
 
 	if (mario_.isDead())
 		resetMarioPosition();
 
 	marioPositionVector_.x += scrollX;
 	marioPositionVector_.y += scrollY;
+
+
+	if (mario_.getY() == ground_[0].getY() - marioNS::HEIGHT)
+	{
+		marioPositionVector_.y = 0;
+	}
 
 	message_ = "X:  ";
 	message_ += std::to_string(marioPositionVector_.x);
@@ -274,42 +286,78 @@ void World::updateScroll()
 	message_ += "    Y Velocity: ";
 	message_ += std::to_string(mario_.getVelocity().y);
 
-	//TODO: Add in this effect for the y direction.  Should only scroll in y direction if within its bounds. 
-	if (marioPositionVector_.x >= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER) && 
-		marioPositionVector_.x <= distanceToRightEdge - worldNS::EDGE_SPACER &&
-		marioPositionVector_.y <= 0 && 
-		marioPositionVector_.y >= -1 * distanceToTopEdge)
+
+
+	//TODO: Add in this effect for the y direction.  Should only scroll in y direction if within its bounds.
+	if (marioPositionVector_.x >= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER) &&
+		marioPositionVector_.x <= distanceToRightEdge - worldNS::EDGE_SPACER)
+		withinHorizonalScroll_ = true;
+	else
+		withinHorizonalScroll_ = false;
+
+	if (marioPositionVector_.y <= 0 &&
+		marioPositionVector_.y >= distanceToTopEdge)
+		withinVerticalScroll_ = true;
+	else
+		withinVerticalScroll_ = false;
+
+
+	if (withinHorizonalScroll_)
 	{
-		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - scrollX * 0.25);
-		backgroundImages_[0]->setY(backgroundImages_[0]->getY() - scrollY);
+		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - scrollX * 0.40);
 		//paralax scrolling 
 		backgroundImages_[1]->setX(backgroundImages_[1]->getX() - (scrollX * 0.5));
-		backgroundImages_[1]->setY(backgroundImages_[1]->getY() - (scrollY));
-
-		if (!entities_.empty())
-		{
-			for (auto entity : entities_)
-			{
-				entity->setX(entity->getX() - scrollX);
-				entity->setY(entity->getY() - scrollY);
-			}
-		}
-
-		if (!villains_.empty())
-		{
-			for (auto villain : villains_)
-			{
-				villain->setX(villain->getX() - scrollX);
-				villain->setY(villain->getY() - scrollY);
-			}
-		}
-
+		backgroundImages_[2]->setX(backgroundImages_[2]->getX() - (scrollX * 0.9));
 	}
-	else
+
+	if (withinVerticalScroll_)
+	{
+		backgroundImages_[0]->setY(backgroundImages_[0]->getY() - (scrollY * 0.40));
+		//paralax scrolling 
+		backgroundImages_[1]->setY(backgroundImages_[1]->getY() - (scrollY * 0.50));
+		backgroundImages_[2]->setY(backgroundImages_[2]->getY() - (scrollY * 0.9));
+	}
+
+	if (!entities_.empty())
+	{
+		for (auto entity : entities_)
+		{
+			if (withinHorizonalScroll_)
+				entity->setX(entity->getX() - scrollX);
+			if (withinVerticalScroll_)
+				entity->setY(entity->getY() - scrollY);
+		}
+	}
+
+	if (!villains_.empty())
+	{
+		for (auto villain : villains_)
+		{
+			if (withinHorizonalScroll_)
+				villain->setX(villain->getX() - scrollX);
+			if (withinVerticalScroll_)
+				villain->setY(villain->getY() - scrollY);
+		}
+	}
+
+	if (!withinHorizonalScroll_)
 	{
 		mario_.setX(mario_.getX() + frameTime * mario_.getVelocity().x);
-		//mario_.setY(mario_.getY() + frameTime * mario_.getVelocity().y);
+		if (marioPositionVector_.x <= 0)
+		{
+			marioPositionVector_.x = 0;
+		}
+		else if (marioPositionVector_.x >= worldWidth_ - mario_.getWidth())
+		{
+			marioPositionVector_.x = worldWidth_ - mario_.getWidth();
+		}
 	}
+
+	if (marioPositionVector_.y <= 0)
+	{
+		mario_.setY(GAME_HEIGHT / 2);
+	}
+
 }
 
 void World::resetMarioPosition()
