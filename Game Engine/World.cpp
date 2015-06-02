@@ -123,11 +123,6 @@ void World::update()      // must override pure virtual from Game
 	marioStuckOnRight_ = false;
 	marioStuckOnLeft_ = false;
 
-	for (auto villain : villains_)
-	{
-		villain->update(frameTime);
-	}
-
 }
 
 void World::ai()          // "
