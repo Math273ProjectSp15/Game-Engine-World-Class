@@ -10,6 +10,9 @@
 #include "image.h"
 #include "entity.h"
 #include "Mario.h"
+#include <string>
+#include <sstream>
+#include "textDX.h"
 
 
 struct WINDOWRECT 
@@ -62,6 +65,12 @@ protected:
 
 	int distanceToRightEdge;
 	int distanceToTopEdge;
+
+	//Text used for debugging
+	TextDX *dxFont_;
+	std::string message_;
+	float messageY_;
+
 public:
 	//World() {};
 	World();

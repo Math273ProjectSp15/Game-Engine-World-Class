@@ -7,6 +7,9 @@ World::World()
 	windowRECT_.right = GAME_WIDTH;
 	windowRECT_.top = GAME_HEIGHT;
 	windowRECT_.bottom = 0;
+
+	dxFont_ = new TextDX(); //DirectX Font
+	messageY_ = 0;
 }
 
 
@@ -14,6 +17,7 @@ World::World()
 World::~World()
 {
 	releaseAll();           // call onLostDevice() for every graphics item
+	safeDelete(dxFont_);
 }
 
 // Initialize the game
@@ -29,6 +33,11 @@ void World::initialize(HWND hwnd)
 	// mario_
 	if (!mario_.initialize(this, marioNS::WIDTH, marioNS::HEIGHT, marioNS::TEXTURE_COLS, &marioTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario entity"));
+
+	// initialize DirectX font
+	// 18 pixel high Arial
+	if (dxFont_->initialize(graphics, 18, true, false, "Arial") == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing DirectX font"));
 
 	mario_.setFrames(marioNS::IDLE_MARIO_START_FRAME, marioNS::IDLE_MARIO_END_FRAME);
 	mario_.setCurrentFrame(marioNS::IDLE_MARIO_START_FRAME);
@@ -102,26 +111,26 @@ void World::update()      // must override pure virtual from Game
 	mario_.update(frameTime);
 	villains_[0]->update(frameTime);
 	updateScroll();
-	if (moveUp && !marioStuckOnTop_)
-	{
-		updateScroll();
-	}
-	if (moveDown && !marioStuckOnBottom_)
-	{
-		updateScroll();
-	}
-	if (moveRight && !marioStuckOnRight_)
-	{
-		updateScroll();
-	}
-	if (moveLeft && !marioStuckOnLeft_)
-	{
-		updateScroll();
-	}
-	marioStuckOnTop_ = false;
-	marioStuckOnBottom_ = false;
-	marioStuckOnRight_ = false;
-	marioStuckOnLeft_ = false;
+	//if (moveUp && !marioStuckOnTop_)
+	//{
+	//	updateScroll();
+	//}
+	//if (moveDown && !marioStuckOnBottom_)
+	//{
+	//	updateScroll();
+	//}
+	//if (moveRight && !marioStuckOnRight_)
+	//{
+	//	updateScroll();
+	//}
+	//if (moveLeft && !marioStuckOnLeft_)
+	//{
+	//	updateScroll();
+	//}
+	//marioStuckOnTop_ = false;
+	//marioStuckOnBottom_ = false;
+	//marioStuckOnRight_ = false;
+	//marioStuckOnLeft_ = false;
 
 }
 
@@ -219,11 +228,16 @@ void World::render()      // "
 		}
 	}
 
+	dxFont_->setFontColor(graphicsNS::BLACK);
+	dxFont_->print(message_, 20, (int)messageY_);
+
+
 	graphics->spriteEnd();                  // end drawing sprites
 }
 
 void World::releaseAll()
 {
+	dxFont_->onLostDevice();
 	marioTexture_.onLostDevice();
 	villainsTexture_.onLostDevice();
 	Game::releaseAll();
@@ -232,6 +246,7 @@ void World::releaseAll()
 
 void World::resetAll()
 {
+	dxFont_->onResetDevice();
 	marioTexture_.onResetDevice();
 	villainsTexture_.onResetDevice();
 	Game::resetAll();
@@ -249,6 +264,15 @@ void World::updateScroll()
 
 	marioPositionVector_.x += scrollX;
 	marioPositionVector_.y += scrollY;
+
+	message_ = "X:  ";
+	message_ += std::to_string(marioPositionVector_.x);
+	message_ += "    Y: ";
+	message_ += std::to_string(marioPositionVector_.y);
+	message_ += "    X Velocity: ";
+	message_ += std::to_string(mario_.getVelocity().x);
+	message_ += "    Y Velocity: ";
+	message_ += std::to_string(mario_.getVelocity().y);
 
 	//TODO: Add in this effect for the y direction.  Should only scroll in y direction if within its bounds. 
 	if (marioPositionVector_.x >= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER) && 

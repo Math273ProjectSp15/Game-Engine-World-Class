@@ -26,6 +26,7 @@
     <ClInclude Include="PeriwinkleVillain.h" />
     <ClInclude Include="PurpleVillain.h" />
     <ClInclude Include="RedVillain.h" />
+    <ClInclude Include="textDX.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="YellowVillain.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="PeriwinkleVillain.cpp" />
     <ClCompile Include="PurpleVillain.cpp" />
     <ClCompile Include="RedVillain.cpp" />
+    <ClCompile Include="textDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="World.cpp" />
