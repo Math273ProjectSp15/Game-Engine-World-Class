@@ -7,6 +7,7 @@ bool Villain::initialize(Game *gamePtr, TextureManager *textureM)
 	deadImage_.setFrames(villainNS::START_FRAME, villainNS::END_FRAME);
 	deadImage_.setCurrentFrame(villainNS::START_FRAME);
 	deadImage_.setFrameDelay(villainNS::ANIMATION_DELAY);
+	deadImage_.setLoop(false);
 
 	onGround_ = false;
 	dead_ = false;

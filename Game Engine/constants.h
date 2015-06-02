@@ -39,6 +39,7 @@ const char GAME_TITLE[] = "MarioGame";
 const bool FULLSCREEN = false;              // windowed or fullscreen
 const UINT GAME_WIDTH =  1200;               // width of game in pixels
 const UINT GAME_HEIGHT = 800;               // height of game in pixels
+const double MAIN_BACKGROUND_SHIFT = 0.8;   //Shift background up or down to view clouds
  
 // game
 const bool VSYNC = true;                    // true locks display to vertical sync rate

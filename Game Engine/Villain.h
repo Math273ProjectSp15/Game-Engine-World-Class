@@ -4,9 +4,9 @@
 namespace villainNS {
 	const int WIDTH = 256;                   // image width
 	const int HEIGHT = 128;                  // image height
-	const int TEXTURE_COLS = 5;
-	const int START_FRAME = 50;
-	const int END_FRAME = 54;
+	const int TEXTURE_COLS = 6;
+	const int START_FRAME = 60;
+	const int END_FRAME = 65;
 	const double ANIMATION_DELAY = 0.1;
 }
 
