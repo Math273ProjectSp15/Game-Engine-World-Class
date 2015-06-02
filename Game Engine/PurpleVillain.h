@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "Villain.h"
 
 namespace purpleVillainNS
 {
@@ -13,12 +14,14 @@ namespace purpleVillainNS
 	const float MASS = 1.0e6f;
 
 	//Collision RECTS      left, top, right, bottom
-	const RECT EDGE_RECT = { -69, -128, 69, 128 };
+	const RECT EDGE_RECT = { -69, -128, 69, 256 };
 }
 
-class PurpleVillain : public Entity
+class PurpleVillain : public Villain
 {
 public:
 	// inherited member functions
 	bool initialize(Game *gamePtr, TextureManager *textureM);
+	int getVillainHeight() { return 256; }
+private:
 };

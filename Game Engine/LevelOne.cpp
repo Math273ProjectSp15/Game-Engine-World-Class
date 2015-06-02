@@ -63,7 +63,7 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!yellowVillain_.initialize(this, &villainsTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
-	yellowVillain_.setX(levelOneNS::LAVA_X + 300);
+	yellowVillain_.setX(levelOneNS::LAVA_X - 200);
 	yellowVillain_.setY(GAME_HEIGHT / 2);
 
 	//initialize ground

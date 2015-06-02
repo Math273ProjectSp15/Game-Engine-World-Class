@@ -9,6 +9,7 @@
 
 #include "image.h"
 #include "entity.h"
+#include "Villain.h"
 #include "Mario.h"
 #include <string>
 #include <sstream>
@@ -53,7 +54,7 @@ protected:
 	std::vector<Entity*> entities_;
 	//Entity map for villains 
 	//Maps each villain to its coordinates in World
-	std::vector<Entity*> villains_;
+	std::vector<Villain*> villains_;
 	TextureManager villainsTexture_;
 	//Image background for background layers.
 	std::vector<Image*> backgroundImages_;

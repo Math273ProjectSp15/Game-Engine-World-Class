@@ -28,6 +28,7 @@
     <ClInclude Include="RedVillain.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="Villain.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="YellowVillain.h" />
   </ItemGroup>
@@ -47,6 +48,7 @@
     <ClCompile Include="RedVillain.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="Villain.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="YellowVillain.cpp" />

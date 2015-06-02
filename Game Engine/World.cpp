@@ -192,6 +192,25 @@ void World::collisions()  // "
 				collisionDetected = true;
 			}
 		}
+
+		for (auto villain : villains_)
+		{
+			VECTOR2 cv;
+			if (villain->collidesWith(mario_, cv) && mario_.getState() == marioNS::HORIZONTAL_ATTACK)
+			{
+				villain->died();
+			}
+
+			if (villain->collidesWith(*entities_[i], cv))
+			{
+				VECTOR2 standStill = { 0, mario_.getVelocity().y };
+				villain->setVelocity(standStill);
+				villain->setY(entities_[i]->getY() - villain->getVillainHeight());
+				villain->onGround();
+			}
+			else
+				villain->notOnGround();
+		}
 	}
 	if (!collisionDetected)
 	{
@@ -265,11 +284,14 @@ void World::updateScroll()
 	double scrollX = frameTime * mario_.getVelocity().x;
 	double scrollY = mario_.getY() - GAME_HEIGHT / 2;
 
-	if (mario_.isDead())
-		resetMarioPosition();
-
 	marioPositionVector_.x += scrollX;
 	marioPositionVector_.y += scrollY;
+
+	//if (marioPositionVector_.y > 100)
+	//	mario_.died();
+
+	//if (mario_.isDead())
+	//	resetMarioPosition();
 
 
 	if (mario_.getY() == ground_[0].getY() - marioNS::HEIGHT)
@@ -363,6 +385,6 @@ void World::updateScroll()
 void World::resetMarioPosition()
 {
 	marioPositionVector_ = marioInitialPositionVector_;
-	mario_.marioUndead();
+	mario_.undead();
 	mario_.resetMario();
 }

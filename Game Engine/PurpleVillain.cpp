@@ -7,5 +7,10 @@ bool PurpleVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setCurrentFrame(purpleVillainNS::START_FRAME);
 	setFrameDelay(purpleVillainNS::ANIMATION_DELAY);
 	setEdge(purpleVillainNS::EDGE_RECT);
+	setCollisionType(entityNS::BOX);
+
+	Villain::initialize(gamePtr, textureM);
 	return true;
 }
+
+
