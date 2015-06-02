@@ -111,11 +111,7 @@ void Mario::update(float frameTime)
 
 	if (getState() == marioNS::IDLEING)
 	{
-		//setFrames(marioNS::IDLE_MARIO_START_FRAME, marioNS::IDLE_MARIO_END_FRAME);
-		//if (spriteData.y == GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT)
-		//{
-		//	velocity.x = 0;
-		//}
+
 	}
 	else if (getState() == marioNS::WALKING)
 	{
@@ -152,7 +148,6 @@ void Mario::update(float frameTime)
 			velocity.y = -6 * marioNS::SPEED;
 			notOnGround();
 		}
-		//marioJumpUp_.update(frameTime);
 
 	}
 	else if (getState() == marioNS::HORIZONTAL_ATTACK)

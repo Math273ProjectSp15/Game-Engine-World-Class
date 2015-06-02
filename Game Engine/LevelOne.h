@@ -13,9 +13,6 @@ namespace levelOneNS
 	const int worldWidth = 3072;
 	const int worldHeight = 1536;
 	
-	//							left, top, right, bottom
-	//const RECT platformRECT = { -PLATFORM_WIDTH / 2, -PLATFORM_HEIGHT / 2, PLATFORM_WIDTH / 2, PLATFORM_HEIGHT / 2 };
-	//const RECT groundRECT = { -GROUND_ENTITY_WIDTH / 2, -GROUND_ENTITY_HEIGHT / 2, GROUND_ENTITY_WIDTH / 2, GROUND_ENTITY_HEIGHT / 2 };
 	const int MAP_WIDTH = 3072;
 	const int MAP_HEIGHT = 1536;
 	const int GRID_LENGTH = 32;
@@ -80,10 +77,7 @@ public:
 	// inherited member functions
 	// Initialize the game
 	void initialize(HWND hwnd);
-	//void update();      // must override pure virtual from Game
-	//void ai();          // "
-	//void collisions();  // "
-	//void render();      // "
+
 	void releaseAll();
 	void resetAll();
 private:
@@ -107,8 +101,6 @@ private:
 	Image background1_;
 	Image background2_;
 
-	//Entity Objects
-	//Entity platform_;
 	Entity lava_;
 	Entity spike_;
 	

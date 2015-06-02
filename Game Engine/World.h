@@ -77,7 +77,6 @@ protected:
 	float messageY_;
 
 public:
-	//World() {};
 	World();
 	virtual ~World();
 
@@ -94,13 +93,9 @@ public:
 	//Get Functions
 	const int getWorldWidth() { return worldWidth_; }
 	const int getWorldHeight() { return worldHeight_; }
-	//const VECTOR2 getScrollVector() { return scrollVector_; }
 	const WINDOWRECT getWindowRect() { return windowRECT_; }
 
 	//Set Functions
-	//void setXScroll(double scrollX) { scrollVector_.x = scrollX; }
-	//void setYScroll(double scrollY) { scrollVector_.y = scrollY; }
-	//void setScrollVector(double scrollX, double scrollY) { scrollVector_.x = scrollX, scrollVector_.y = scrollY; }
 	void setWindowLeft(double windowLeft) { windowRECT_.left = windowLeft; }
 	void setWindowRight(double windowRight) { windowRECT_.right = windowRight; }
 	void setWindowTop(double windowTop) { windowRECT_.top = windowTop; }
