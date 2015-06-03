@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h" 
 #include "constants.h"
-
+#include "villain.h"
 namespace villainBulletNS
 {
 	const int WIDTH = 256;
@@ -11,7 +11,7 @@ namespace villainBulletNS
 	const int END_FRAME = 11;
 	const int LEFT_RIGHT_SPACER = 20;
 	const int ANIMATION_DELAY = 0.1;
-	const float SPEED = 250;
+	const float SPEED = 350;
 	const RECT VILLAIN_BULLET_EDGE = { -(WIDTH / 2 - LEFT_RIGHT_SPACER), -(HEIGHT / 2),
 		WIDTH / 2 - LEFT_RIGHT_SPACER, HEIGHT / 2 };
 }

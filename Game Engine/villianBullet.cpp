@@ -13,14 +13,16 @@ bool villainBullet::initialize(Game *gamePtr, TextureManager *textureM)
 
 void villainBullet::set(int x, int y, Direction dirc)
 {
-	setX(x);
-	setY(y);
 	if (dirc == RIGHT)
 	{
-
+		setX(x + villainNS::WIDTH / 2);
+		setY(y);
 	}
 	else
 	{
+		setX(x - villainNS::WIDTH / 2);
+		setY(y);
+		setVelocity(-getVelocity());
 		flipHorizontal(true);
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "entity.h"
 #include "constants.h"
+#include "mario.h"
 
 namespace fireballNS
 {
@@ -11,7 +12,7 @@ namespace fireballNS
 	const int END_FRAME = 59;
 	const int LEFT_RIGHT_SPACER = 28;
 	const int ANIMATION_DELAY = 0.1;
-	const float SPEED = 250;
+	const float SPEED = 350;
 	const RECT FIREBALL_EDGE = { -(WIDTH / 2 - LEFT_RIGHT_SPACER), -(HEIGHT / 2),
 		WIDTH / 2 - LEFT_RIGHT_SPACER, HEIGHT / 2 };
 }

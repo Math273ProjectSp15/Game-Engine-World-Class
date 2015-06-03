@@ -13,14 +13,16 @@ bool fireball::initialize(Game *gamePtr, TextureManager *textureM)
 
 void fireball::set(int x, int y, Direction dirc)
 {
-	setX(x);
-	setY(y);
 	if (dirc == RIGHT)
 	{
-
+		setX(x + marioNS::WALKING_IMAGE_WIDTH / 2);
+		setY(y);
 	}
 	else
 	{
+		setX(x - marioNS::WALKING_IMAGE_WIDTH);
+		setY(y);
+		setVelocity(-getVelocity());
 		flipHorizontal(true);
 	}
 }

@@ -58,7 +58,6 @@ protected:
 	//Maps each villain to its coordinates in World
 	std::vector<Villain*> villains_;
 	TextureManager villainsTexture_;
-
 	
 	//Bullets
 	fireWave fireWave_;
@@ -68,6 +67,8 @@ protected:
 	std::vector<fireWave> fireWaves_;
 	std::vector<fireball> fireballs_;
 	std::vector<villainBullet> villainBullets_;
+
+	int count_;//used to record the time to shoot 
 
 	//Image background for background layers.
 	std::vector<Image*> backgroundImages_;

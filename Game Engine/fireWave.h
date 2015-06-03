@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "constants.h"
+#include "Mario.h"
 
 namespace fireWaveNS
 {
@@ -11,7 +12,7 @@ namespace fireWaveNS
 	const int END_FRAME = 25;
 	const int TOP_BOTTOM_SPACER = 28;
 	const int ANIMATION_DELAY = 0.1;
-	const float SPEED = 250;
+	const float SPEED = 350;
 	const RECT FIREWAVE_EDGE = { -(WIDTH / 2), -(HEIGHT / 2 - TOP_BOTTOM_SPACER),
 		WIDTH / 2, HEIGHT / 2 - TOP_BOTTOM_SPACER };
 

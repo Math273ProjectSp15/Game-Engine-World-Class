@@ -18,7 +18,7 @@ public:
 	// inherited member functions
 	virtual void draw();
 	bool initialize(Game *gamePtr, TextureManager *textureM);
-	void update(float frameTime, VECTOR2 marioPosition);
+	//void update(float frameTime, VECTOR2 marioPosition);
 
 	virtual int getVillainHeight() = 0;
 
