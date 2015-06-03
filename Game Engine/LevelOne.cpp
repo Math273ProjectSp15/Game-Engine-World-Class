@@ -4,7 +4,7 @@ LevelOne::LevelOne()
 {
 	worldWidth_ = levelOneNS::worldWidth;
 	worldHeight_ = levelOneNS::worldHeight;
-	marioPositionVector_.x = levelOneNS::marioInitialPositionX;
+	marioPositionVector_.x = GAME_WIDTH / 2;
 	marioPositionVector_.y = levelOneNS::marioInitialPositionY;
 	marioInitialPositionVector_.x = marioPositionVector_.x;
 	marioInitialPositionVector_.y = marioPositionVector_.y;

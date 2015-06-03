@@ -358,8 +358,7 @@ void World::resetAll()
 
 void World::updateScroll()
 {
-
-	double scrollX = frameTime * mario_.getVelocity().x;
+	double scrollX = mario_.getX() - GAME_WIDTH / 2;
 	double scrollY = mario_.getY() - GAME_HEIGHT / 2;
 
 	marioPositionVector_.x += scrollX;
@@ -389,10 +388,8 @@ void World::updateScroll()
 	message_ += std::to_string(villainTimer_.check());
 
 
-
-	//TODO: Add in this effect for the y direction.  Should only scroll in y direction if within its bounds.
-	if (marioPositionVector_.x >= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER) &&
-		marioPositionVector_.x <= distanceToRightEdge - worldNS::EDGE_SPACER)
+	if ((marioPositionVector_.x >= GAME_WIDTH / 2) &&
+		marioPositionVector_.x <= worldWidth_ - GAME_WIDTH / 2)
 		withinHorizonalScroll_ = true;
 	else
 		withinHorizonalScroll_ = false;
@@ -444,7 +441,6 @@ void World::updateScroll()
 
 	if (!withinHorizonalScroll_)
 	{
-		mario_.setX(mario_.getX() + frameTime * mario_.getVelocity().x);
 		if (marioPositionVector_.x <= 0)
 		{
 			marioPositionVector_.x = 0;
@@ -459,6 +455,9 @@ void World::updateScroll()
 	{
 		mario_.setY(GAME_HEIGHT / 2);
 	}
+
+	if (withinHorizonalScroll_)
+		mario_.setX(GAME_WIDTH / 2);
 
 }
 
