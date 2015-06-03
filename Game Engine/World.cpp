@@ -362,7 +362,10 @@ void World::updateScroll()
 	double scrollY = mario_.getY() - GAME_HEIGHT / 2;
 
 	marioPositionVector_.x += scrollX;
-	marioPositionVector_.y += scrollY;
+	if (marioPositionVector_.y > 0)
+		marioPositionVector_.y = mario_.getY() - GAME_HEIGHT / 2;
+	else
+		marioPositionVector_.y += scrollY;
 
 	//if (marioPositionVector_.y > 100)
 	//	mario_.died();
@@ -394,8 +397,8 @@ void World::updateScroll()
 	else
 		withinHorizonalScroll_ = false;
 
-	if (marioPositionVector_.y <= 0 &&
-		marioPositionVector_.y >= distanceToTopEdge)
+	if (marioPositionVector_.y <= 0)// &&
+		//marioPositionVector_.y >= distanceToTopEdge)
 		withinVerticalScroll_ = true;
 	else
 		withinVerticalScroll_ = false;
@@ -451,11 +454,8 @@ void World::updateScroll()
 		}
 	}
 
-	if (marioPositionVector_.y <= 0)
-	{
+	if (withinVerticalScroll_)
 		mario_.setY(GAME_HEIGHT / 2);
-	}
-
 	if (withinHorizonalScroll_)
 		mario_.setX(GAME_WIDTH / 2);
 
