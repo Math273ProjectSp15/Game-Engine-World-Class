@@ -74,7 +74,7 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground0 texture"));
 	ground_[0].setCollisionType(entityNS::BOX);
 	ground_[0].setEdge(levelOneNS::GROUND_EDGE);
-	// Set position
+
 	ground_[0].setX(levelOneNS::GROUND1_X);
 	ground_[0].setY(levelOneNS::GROUND_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&ground_[0]);
@@ -83,7 +83,6 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground1 texture"));
 	ground_[1].setCollisionType(entityNS::BOX);
 	ground_[1].setEdge(levelOneNS::GROUND_EDGE);
-	// Set position
 	ground_[1].setX(levelOneNS::GROUND2_X);
 	ground_[1].setY(levelOneNS::GROUND_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&ground_[1]);
@@ -92,7 +91,6 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ground2 texture"));
 	ground_[2].setCollisionType(entityNS::BOX);
 	ground_[2].setEdge(levelOneNS::GROUND1_EDGE);
-	// Set position
 	ground_[2].setX(levelOneNS::GROUND3_X);
 	ground_[2].setY(levelOneNS::GROUND_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&ground_[2]);
@@ -102,7 +100,6 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing lava texture"));
 	lava_.setCollisionType(entityNS::BOX);
 	lava_.setEdge(levelOneNS::LAVA_EDGE);
-	// Set position
 	lava_.setX(levelOneNS::LAVA_X);
 	lava_.setY(levelOneNS::LAVA_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&lava_);
@@ -112,7 +109,6 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing spike texture"));
 	spike_.setCollisionType(entityNS::BOX);
 	spike_.setEdge(levelOneNS::SPIKE_EDGE);
-	// Set position
 	spike_.setX(levelOneNS::SPIKE_X);
 	spike_.setY(levelOneNS::SPIKE_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&spike_);
@@ -121,10 +117,9 @@ void LevelOne::initialize(HWND hwnd)
 	airground_.resize(5);
 
 	if (!airground_[0].initialize(this, 0, 0, 0, &airground1Texture_))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground1 texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground0 texture"));
 	airground_[0].setCollisionType(entityNS::BOX);
 	airground_[0].setEdge(levelOneNS::AIRGROUND1_EDGE);
-	// Set position
 	airground_[0].setX(levelOneNS::AIRGROUND1_X);
 	airground_[0].setY(levelOneNS::AIRGROUND1_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&airground_[0]);
@@ -133,7 +128,6 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground1 texture"));
 	airground_[1].setCollisionType(entityNS::BOX);
 	airground_[1].setEdge(levelOneNS::AIRGROUND1_EDGE);
-	// Set position
 	airground_[1].setX(levelOneNS::AIRGROUND2_X);
 	airground_[1].setY(levelOneNS::AIRGROUND2_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&airground_[1]);
@@ -142,7 +136,6 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground2 texture"));
 	airground_[2].setCollisionType(entityNS::BOX);
 	airground_[2].setEdge(levelOneNS::AIRGROUND2_EDGE);
-	// Set position
 	airground_[2].setX(levelOneNS::AIRGROUND3_X);
 	airground_[2].setY(levelOneNS::AIRGROUND3_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&airground_[2]);
@@ -151,7 +144,6 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground3 texture"));
 	airground_[3].setCollisionType(entityNS::BOX);
 	airground_[3].setEdge(levelOneNS::AIRGROUND3_EDGE);
-	// Set position
 	airground_[3].setX(levelOneNS::AIRGROUND4_X);
 	airground_[3].setY(levelOneNS::AIRGROUND4_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&airground_[3]);
@@ -160,10 +152,10 @@ void LevelOne::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing airground4 texture"));
 	airground_[4].setCollisionType(entityNS::BOX);
 	airground_[4].setEdge(levelOneNS::AIRGROUND1_EDGE);
-	// Set position
 	airground_[4].setX(levelOneNS::AIRGROUND5_X);
 	airground_[4].setY(levelOneNS::AIRGROUND5_Y + (float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	entities_.push_back(&airground_[4]);
+
 
 	villains_.push_back(&yellowVillain_);
 

@@ -14,7 +14,9 @@
 #include <string>
 #include <sstream>
 #include "textDX.h"
-
+#include "fireball.h"
+#include "fireWave.h"
+#include "villainBullet.h"
 
 struct WINDOWRECT 
 {
@@ -56,9 +58,19 @@ protected:
 	//Maps each villain to its coordinates in World
 	std::vector<Villain*> villains_;
 	TextureManager villainsTexture_;
+
+	
+	//Bullets
+	fireWave fireWave_;
+	fireball fireball_;
+	villainBullet villainBullet_;
+
+	std::vector<fireWave> fireWaves_;
+	std::vector<fireball> fireballs_;
+	std::vector<villainBullet> villainBullets_;
+
 	//Image background for background layers.
 	std::vector<Image*> backgroundImages_;
-
 	std::vector <Entity> ground_;
 	std::vector <Entity> airground_;
 
