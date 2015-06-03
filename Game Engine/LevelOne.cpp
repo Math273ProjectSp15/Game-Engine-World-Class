@@ -60,6 +60,9 @@ void LevelOne::initialize(HWND hwnd)
 	background_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT * MAIN_BACKGROUND_SHIFT);
 	background1_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	background2_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT * 0.6);
+	background_.setX(-(worldNS::EDGE_SPACER * 2));
+	background1_.setX(-(worldNS::EDGE_SPACER * 2));
+	background2_.setX(-(worldNS::EDGE_SPACER * 2));
 
 	//initialize ground
 	ground_.resize(3);
