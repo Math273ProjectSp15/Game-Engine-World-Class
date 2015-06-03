@@ -1,5 +1,13 @@
 #include "CyanVillain.h"
 
+
+CyanVillain::CyanVillain(Game *gamePtr, TextureManager *textureM, int X, int Y)
+{
+	initialize(gamePtr, textureM);
+	setX(X);
+	setY(Y);
+}
+
 bool CyanVillain::initialize(Game *gamePtr, TextureManager *textureM)
 {
 	Entity::initialize(gamePtr, cyanVillainNS::WIDTH, cyanVillainNS::HEIGHT, cyanVillainNS::TEXTURE_COLS, textureM);

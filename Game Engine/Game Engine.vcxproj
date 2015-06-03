@@ -31,6 +31,8 @@
     <ClInclude Include="RedVillain.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Villain.h" />
     <ClInclude Include="villainBullet.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="YellowVillain.h" />
@@ -54,6 +56,9 @@
     <ClCompile Include="RedVillain.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Villain.cpp" />
+    <ClCompile Include="villainBullet.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="YellowVillain.cpp" />

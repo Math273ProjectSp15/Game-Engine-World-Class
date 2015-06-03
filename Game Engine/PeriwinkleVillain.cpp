@@ -1,5 +1,12 @@
 #include "PeriwinkleVillain.h"
 
+PeriwinkleVillain::PeriwinkleVillain(Game *gamePtr, TextureManager *textureM, int X, int Y)
+{
+	initialize(gamePtr, textureM);
+	setX(X);
+	setY(Y);
+}
+
 bool PeriwinkleVillain::initialize(Game *gamePtr, TextureManager *textureM)
 {
 	Entity::initialize(gamePtr, periwinkleVillainNS::WIDTH, periwinkleVillainNS::HEIGHT, periwinkleVillainNS::TEXTURE_COLS, textureM);

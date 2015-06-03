@@ -142,7 +142,11 @@ void World::update()      // must override pure virtual from Game
 		mario_.setEdge(marioNS::IDLE_RECT);
 	}
 	mario_.update(frameTime);
-	villains_[0]->update(frameTime, marioPositionVector_);
+	
+	for (auto villain : villains_)
+	{
+		villain->update(frameTime, mario_.getX(), mario_.getY());
+	}
 
 	//bullets
 	for (int i = 0; i < fireWaves_.size(); i++)
@@ -183,6 +187,8 @@ void World::update()      // must override pure virtual from Game
 	marioStuckOnBottom_ = false;
 	marioStuckOnRight_ = false;
 	marioStuckOnLeft_ = false;
+
+	updateVillainContainer();
 
 }
 
@@ -379,6 +385,8 @@ void World::updateScroll()
 	message_ += std::to_string(mario_.getVelocity().x);
 	message_ += "    Y Velocity: ";
 	message_ += std::to_string(mario_.getVelocity().y);
+	message_ += "    TIMER: ";
+	message_ += std::to_string(villainTimer_.check());
 
 
 
@@ -459,4 +467,55 @@ void World::resetMarioPosition()
 	marioPositionVector_ = marioInitialPositionVector_;
 	mario_.undead();
 	mario_.resetMario();
+}
+
+Villain* World::createVillain()
+{
+	int selection = randomInteger(0, 5);
+
+	switch(selection)
+	{
+	case 0:
+		return new CyanVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 1:
+		return new GreenVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 2:
+		return new PeriwinkleVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 3:
+		return new PurpleVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 4:
+		return new RedVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 5:
+		return new YellowVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	}
+	return new CyanVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+}
+
+void World::updateVillainContainer()
+{
+	int deadCount = 0;
+
+	if (!villains_.empty())
+	{
+		auto villain = std::begin(villains_);
+		while (villain != std::end(villains_))
+		{
+			if ((*villain)->isDead() && (*villain)->animationComplete())
+			{
+				delete (*villain);
+				villain = villains_.erase(villain);
+				deadCount++;
+			}
+			else
+				++villain;
+		}
+
+		if (villainTimer_.check() > VILLAIN_SPAWN_TIME)
+		{
+			villains_.push_back(createVillain());
+			villainTimer_.reset();
+		}
+	}
+	else 
+		villains_.push_back(createVillain());
 }

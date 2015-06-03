@@ -17,6 +17,15 @@
 #include "fireball.h"
 #include "fireWave.h"
 #include "villainBullet.h"
+#include "Random.h"
+#include "YellowVillain.h"
+#include "CyanVillain.h"
+#include "GreenVillain.h"
+#include "PeriwinkleVillain.h"
+#include "PurpleVillain.h"
+#include "RedVillain.h"
+#include "Timer.h"
+
 
 struct WINDOWRECT 
 {
@@ -89,6 +98,10 @@ protected:
 	std::string message_;
 	float messageY_;
 
+	//Functions for managing villains
+	Villain* createVillain();
+	void updateVillainContainer();
+	Timer villainTimer_;
 public:
 	World();
 	virtual ~World();

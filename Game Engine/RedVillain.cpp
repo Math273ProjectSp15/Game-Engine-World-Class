@@ -1,5 +1,12 @@
 #include "RedVillain.h"
 
+RedVillain::RedVillain(Game *gamePtr, TextureManager *textureM, int X, int Y)
+{
+	initialize(gamePtr, textureM);
+	setX(X);
+	setY(Y);
+}
+
 bool RedVillain::initialize(Game *gamePtr, TextureManager *textureM)
 {
 	Entity::initialize(gamePtr, redVillainNS::WIDTH, redVillainNS::HEIGHT, redVillainNS::TEXTURE_COLS, textureM);

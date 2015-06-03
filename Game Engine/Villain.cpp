@@ -15,7 +15,7 @@ bool Villain::initialize(Game *gamePtr, TextureManager *textureM)
 	return true;
 }
 
-void Villain::update(float frameTime, VECTOR2 marioPosition)
+void Villain::update(float frameTime, int marioX, int marioY)
 {
 	if (dead_)
 		deadImage_.update(frameTime);
@@ -32,7 +32,7 @@ void Villain::update(float frameTime, VECTOR2 marioPosition)
 		}
 		spriteData.y += velocity.y * frameTime;
 
-		if (marioPosition.x < spriteData.x)
+		if (marioX < spriteData.x)
 		{
 			flipHorizontal(false);
 			velocity.x = -abs(villainNS::SPEED);
@@ -60,4 +60,10 @@ void Villain::draw()
 		Image::draw();
 	}
 
+}
+
+
+bool Villain::animationComplete()
+{
+	return deadImage_.getAnimationComplete();
 }

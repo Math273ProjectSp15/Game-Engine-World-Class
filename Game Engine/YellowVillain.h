@@ -19,6 +19,7 @@ namespace yellowVillainNS
 class YellowVillain : public Villain
 {
 public:
+	YellowVillain(Game *gamePtr, TextureManager *textureM, int X, int Y);
 	// inherited member functions
 	virtual bool initialize(Game *gamePtr, TextureManager *textureM);
 	int getVillainHeight() { return 128; }

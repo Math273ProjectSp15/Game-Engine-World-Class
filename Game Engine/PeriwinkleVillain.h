@@ -19,6 +19,7 @@ namespace periwinkleVillainNS
 class PeriwinkleVillain : public Villain
 {
 public:
+	PeriwinkleVillain(Game *gamePtr, TextureManager *textureM, int X, int Y);
 	// inherited member functions
 	bool initialize(Game *gamePtr, TextureManager *textureM);
 	int getVillainHeight() { return 128; }

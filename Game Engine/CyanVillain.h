@@ -19,6 +19,7 @@ namespace cyanVillainNS
 class CyanVillain : public Villain
 {
 public:
+	CyanVillain(Game *gamePtr, TextureManager *textureM, int X, int Y);
 	// inherited member functions
 	bool initialize(Game *gamePtr, TextureManager *textureM);
 	int getVillainHeight() { return 128; }
