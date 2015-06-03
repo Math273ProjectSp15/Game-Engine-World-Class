@@ -45,8 +45,6 @@ void World::initialize(HWND hwnd)
 	if (!villainBullet_.initialize(this, &villainsTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villainBullet entity"));
 
-	count_ = 0;
-
 	// initialize DirectX font
 	// 18 pixel high Arial
 	if (dxFont_->initialize(graphics, 18, true, false, "Arial") == false)
@@ -67,7 +65,6 @@ void World::initialize(HWND hwnd)
 
 void World::update()      // must override pure virtual from Game
 {
-	count_++;
 	bool moveLeft = false;
 	bool moveRight = false;
 	bool moveUp = false;
@@ -114,38 +111,30 @@ void World::update()      // must override pure virtual from Game
 	else if (input->isKeyDown(D_KEY))
 	{
 		mario_.setState(marioNS::CLAW_ATTACK);
-		if (count_ >= 15)
+		fireWave temp = fireWave_;
+		if (mario_.getDirection() == marioNS::LEFT)
 		{
-			fireWave temp = fireWave_;
-			if (mario_.getDirection() == marioNS::LEFT)
-			{
-				temp.set(mario_.getX(), mario_.getY(), LEFT);
-			}
-			else if (mario_.getDirection() == marioNS::RIGHT)
-			{
-				temp.set(mario_.getX(), mario_.getY(), RIGHT);
-			}
-			fireWaves_.push_back(temp);
-			count_ = 0;
+			temp.set(mario_.getX(), mario_.getY(), LEFT);
 		}
+		else if (mario_.getDirection() == marioNS::RIGHT)
+		{
+			temp.set(mario_.getX(), mario_.getY(), RIGHT);
+		}
+		fireWaves_.push_back(temp);
 	}
 	else if (input->isKeyDown(S_KEY))
 	{
 		mario_.setState(marioNS::SHOOT_ATTACK);
-		if (count_ >= 15)
+		fireball temp = fireball_;
+		if (mario_.getDirection() == marioNS::LEFT)
 		{
-			fireball temp = fireball_;
-			if (mario_.getDirection() == marioNS::LEFT)
-			{
-				temp.set(mario_.getX(), mario_.getY(), LEFT);
-			}
-			else if (mario_.getDirection() == marioNS::RIGHT)
-			{
-				temp.set(mario_.getX(), mario_.getY(), RIGHT);
-			}
-			fireballs_.push_back(temp);
-			count_ = 0;
+			temp.set(mario_.getX(), mario_.getY(), LEFT);
 		}
+		else if (mario_.getDirection() == marioNS::RIGHT)
+		{
+			temp.set(mario_.getX(), mario_.getY(), RIGHT);
+		}
+		fireballs_.push_back(temp);
 	}
 	else
 	{
@@ -153,7 +142,11 @@ void World::update()      // must override pure virtual from Game
 		mario_.setEdge(marioNS::IDLE_RECT);
 	}
 	mario_.update(frameTime);
-	//villains_[0]->update(frameTime, marioPositionVector_);
+	
+	for (auto villain : villains_)
+	{
+		villain->update(frameTime, mario_.getX(), mario_.getY());
+	}
 
 	//bullets
 	for (int i = 0; i < fireWaves_.size(); i++)
@@ -194,6 +187,8 @@ void World::update()      // must override pure virtual from Game
 	marioStuckOnBottom_ = false;
 	marioStuckOnRight_ = false;
 	marioStuckOnLeft_ = false;
+
+	updateVillainContainer();
 
 }
 
@@ -306,57 +301,28 @@ void World::render()      // "
 	{
 		for (int i = 0; i < fireWaves_.size(); i++)
 		{
-			if (fireWaves_[i].getX() > windowRECT_.right
-				|| fireWaves_[i].getX() + fireWaves_[i].getWidth() < windowRECT_.left)
-			{
-				fireWaves_.erase(fireWaves_.begin() + i);
-				i--;
-			}
-			else
-			{
-				fireWaves_[i].draw();
-			}
+			fireWaves_[i].draw();
 		}
 	}
 	if (!fireballs_.empty())
 	{
 		for (int i = 0; i < fireballs_.size(); i++)
 		{
-			if (fireballs_[i].getX() > windowRECT_.right
-				|| fireballs_[i].getX() + fireballs_[i].getWidth() < windowRECT_.left)
-			{
-				fireballs_.erase(fireballs_.begin() + i);
-				i--;
-			}
-			else
-			{
-				fireballs_[i].draw();
-			}
+			fireballs_[i].draw();
 		}
 	}
 	if (!villainBullets_.empty())
 	{
 		for (int i = 0; i < villainBullets_.size(); i++)
 		{
-			for (int i = 0; i < villainBullets_.size(); i++)
-			{
-				if (villainBullets_[i].getX() > windowRECT_.right
-					|| villainBullets_[i].getX() + villainBullets_[i].getWidth() < windowRECT_.left)
-				{
-					villainBullets_.erase(villainBullets_.begin() + i);
-					i--;
-				}
-				else
-				{
-					villainBullets_[i].draw();
-				}
-			}
+			villainBullets_[i].draw();
 		}
 	}
 
 	//villains
 	if (!villains_.empty())
 	{
+
 		for (auto villain : villains_)
 		{
 			villain->draw();
@@ -391,12 +357,20 @@ void World::resetAll()
 
 void World::updateScroll()
 {
-
-	double scrollX = frameTime * mario_.getVelocity().x;
+	double scrollX = mario_.getX() - GAME_WIDTH / 2;
 	double scrollY = mario_.getY() - GAME_HEIGHT / 2;
 
-	marioPositionVector_.x += scrollX;
-	marioPositionVector_.y += scrollY;
+	if (marioPositionVector_.x < GAME_WIDTH / 2 - worldNS::EDGE_SPACER)
+	{
+		marioPositionVector_.x = mario_.getX();
+		scrollX = 0;
+	}
+	else
+		marioPositionVector_.x += scrollX;
+	if (marioPositionVector_.y > 0)
+		marioPositionVector_.y = mario_.getY() - GAME_HEIGHT / 2;
+	else
+		marioPositionVector_.y += scrollY;
 
 	//if (marioPositionVector_.y > 100)
 	//	mario_.died();
@@ -418,18 +392,18 @@ void World::updateScroll()
 	message_ += std::to_string(mario_.getVelocity().x);
 	message_ += "    Y Velocity: ";
 	message_ += std::to_string(mario_.getVelocity().y);
+	message_ += "    TIMER: ";
+	message_ += std::to_string(villainTimer_.check());
 
 
-
-	//TODO: Add in this effect for the y direction.  Should only scroll in y direction if within its bounds.
-	if (marioPositionVector_.x >= (GAME_WIDTH / 2 + worldNS::EDGE_SPACER) &&
-		marioPositionVector_.x <= distanceToRightEdge - worldNS::EDGE_SPACER)
+	if ((marioPositionVector_.x >= GAME_WIDTH / 2) &&
+		marioPositionVector_.x <= worldWidth_ - GAME_WIDTH / 2)
 		withinHorizonalScroll_ = true;
 	else
 		withinHorizonalScroll_ = false;
 
-	if (marioPositionVector_.y <= 0 &&
-		marioPositionVector_.y >= distanceToTopEdge)
+	if (marioPositionVector_.y <= 0)// &&
+		//marioPositionVector_.y >= distanceToTopEdge)
 		withinVerticalScroll_ = true;
 	else
 		withinVerticalScroll_ = false;
@@ -437,7 +411,7 @@ void World::updateScroll()
 
 	if (withinHorizonalScroll_)
 	{
-		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - scrollX * 0.40);
+		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - (scrollX * 0.4));
 		//paralax scrolling 
 		backgroundImages_[1]->setX(backgroundImages_[1]->getX() - (scrollX * 0.5));
 		backgroundImages_[2]->setX(backgroundImages_[2]->getX() - (scrollX * 0.9));
@@ -462,42 +436,6 @@ void World::updateScroll()
 		}
 	}
 
-	for (int i = 0; i < fireballs_.size();i++)
-	{
-		if (withinHorizonalScroll_)
-		{
-			fireballs_[i].setX(fireballs_[i].getX() - scrollX);
-		}
-		if (withinVerticalScroll_)
-		{
-			fireballs_[i].setY(fireballs_[i].getY() - scrollY);
-		}
-	}
-
-	for (int i = 0; i < fireWaves_.size(); i++)
-	{
-		if (withinHorizonalScroll_)
-		{
-			fireWaves_[i].setX(fireWaves_[i].getX() - scrollX);
-		}
-		if (withinVerticalScroll_)
-		{
-			fireWaves_[i].setY(fireWaves_[i].getY() - scrollY);
-		}
-	}
-
-	for (int i = 0; i < villainBullets_.size(); i++)
-	{
-		if (withinHorizonalScroll_)
-		{
-			villainBullets_[i].setX(villainBullets_[i].getX() - scrollX);
-		}
-		if (withinVerticalScroll_)
-		{
-			villainBullets_[i].setY(villainBullets_[i].getY() - scrollY);
-		}
-	}
-
 	if (!villains_.empty())
 	{
 		for (auto villain : villains_)
@@ -511,7 +449,6 @@ void World::updateScroll()
 
 	if (!withinHorizonalScroll_)
 	{
-		mario_.setX(mario_.getX() + frameTime * mario_.getVelocity().x);
 		if (marioPositionVector_.x <= 0)
 		{
 			marioPositionVector_.x = 0;
@@ -522,10 +459,10 @@ void World::updateScroll()
 		}
 	}
 
-	if (marioPositionVector_.y <= 0)
-	{
+	if (withinVerticalScroll_)
 		mario_.setY(GAME_HEIGHT / 2);
-	}
+	if (withinHorizonalScroll_)
+		mario_.setX(GAME_WIDTH / 2);
 
 }
 
@@ -534,4 +471,55 @@ void World::resetMarioPosition()
 	marioPositionVector_ = marioInitialPositionVector_;
 	mario_.undead();
 	mario_.resetMario();
+}
+
+Villain* World::createVillain()
+{
+	int selection = randomInteger(0, 5);
+
+	switch(selection)
+	{
+	case 0:
+		return new CyanVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 1:
+		return new GreenVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 2:
+		return new PeriwinkleVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 3:
+		return new PurpleVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 4:
+		return new RedVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	case 5:
+		return new YellowVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+	}
+	return new CyanVillain(this, &villainsTexture_, randomInteger(VILLAIN_EDGE_SPACER, worldWidth_ - VILLAIN_EDGE_SPACER), VILLAIN_DROP_ZONE);
+}
+
+void World::updateVillainContainer()
+{
+	int deadCount = 0;
+
+	if (!villains_.empty())
+	{
+		auto villain = std::begin(villains_);
+		while (villain != std::end(villains_))
+		{
+			if ((*villain)->isDead() && (*villain)->animationComplete())
+			{
+				delete (*villain);
+				villain = villains_.erase(villain);
+				deadCount++;
+			}
+			else
+				++villain;
+		}
+
+		if (villainTimer_.check() > VILLAIN_SPAWN_TIME)
+		{
+			villains_.push_back(createVillain());
+			villainTimer_.reset();
+		}
+	}
+	else 
+		villains_.push_back(createVillain());
 }
