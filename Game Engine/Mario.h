@@ -66,6 +66,13 @@ namespace marioNS
 	const int SHOOT_ATTACK_END_FRAME = 48;
 	const float SHOOT_ATTACK_ANIMATION_DELAY = 0.1f;
 
+	const int DYING_IMAGE_WIDTH = 128;
+	const int DYING_IMAGE_HEIGHT = 256;
+	const int DYING_TEXTURE_COLS = 13;
+	const int DYING_IMAGE_START_FRAME = 8;
+	const int DYING_IMAGE_END_FRAME = 12;
+	const float DYING_IMAGE_ANIMATION_DELAY = 0.1f;
+
 	//Collision RECTS      left, top, right, bottom
 	const RECT IDLE_RECT = {-40, -128, 40, 128};
 	const RECT RUN_RECT = { -40, -128, 40, 128 };
@@ -82,7 +89,8 @@ namespace marioNS
 		JUMPING,
 		HORIZONTAL_ATTACK,
 		CLAW_ATTACK,
-		SHOOT_ATTACK
+		SHOOT_ATTACK,
+		DYING
 	};
 
 	enum Direction
@@ -105,6 +113,7 @@ private:
 	Image horizontalAttack_;
 	Image clawAttack_;
 	Image shootAttack_;
+	Image dying_;
 
 public:
 	// constructor

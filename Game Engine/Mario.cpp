@@ -78,6 +78,12 @@ bool Mario::initialize(Game *gamePtr, int width, int height, int ncols,
 	shootAttack_.setCurrentFrame(marioNS::SHOOT_ATTACK_START_FRAME);
 	shootAttack_.setFrameDelay(marioNS::SHOOT_ATTACK_ANIMATION_DELAY);
 
+	dying_.initialize(gamePtr->getGraphics(), marioNS::DYING_IMAGE_WIDTH,
+		marioNS::DYING_IMAGE_HEIGHT, marioNS::DYING_TEXTURE_COLS, textureM);
+	dying_.setFrames(marioNS::DYING_IMAGE_START_FRAME, marioNS::DYING_IMAGE_END_FRAME);
+	dying_.setCurrentFrame(marioNS::DYING_IMAGE_START_FRAME);
+	dying_.setFrameDelay(marioNS::DYING_IMAGE_ANIMATION_DELAY);
+
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
@@ -144,7 +150,6 @@ void Mario::update(float frameTime)
 			velocity.y = -6 * marioNS::SPEED;
 			notOnGround();
 		}
-
 	}
 	else if (getState() == marioNS::HORIZONTAL_ATTACK)
 	{
@@ -159,7 +164,10 @@ void Mario::update(float frameTime)
 	{
 		shootAttack_.update(frameTime);
 	}
-
+	else if (getState() == marioNS::DYING)
+	{
+		dying_.update(frameTime);
+	}
 
 	if (!isOnGround())
 	{

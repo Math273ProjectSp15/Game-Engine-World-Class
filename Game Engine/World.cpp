@@ -307,7 +307,7 @@ void World::render()      // "
 		for (int i = 0; i < fireWaves_.size(); i++)
 		{
 			if (fireWaves_[i].getX() > windowRECT_.right
-				|| fireWaves_[i].getX() - fireWaves_[i].getWidth() < windowRECT_.left)
+				|| fireWaves_[i].getX() + fireWaves_[i].getWidth() < windowRECT_.left)
 			{
 				fireWaves_.erase(fireWaves_.begin() + i);
 				i--;
@@ -323,7 +323,7 @@ void World::render()      // "
 		for (int i = 0; i < fireballs_.size(); i++)
 		{
 			if (fireballs_[i].getX() > windowRECT_.right
-				|| fireballs_[i].getX() - fireballs_[i].getWidth() < windowRECT_.left)
+				|| fireballs_[i].getX() + fireballs_[i].getWidth() < windowRECT_.left)
 			{
 				fireballs_.erase(fireballs_.begin() + i);
 				i--;
@@ -341,7 +341,7 @@ void World::render()      // "
 			for (int i = 0; i < villainBullets_.size(); i++)
 			{
 				if (villainBullets_[i].getX() > windowRECT_.right
-					|| villainBullets_[i].getX() - villainBullets_[i].getWidth() < windowRECT_.left)
+					|| villainBullets_[i].getX() + villainBullets_[i].getWidth() < windowRECT_.left)
 				{
 					villainBullets_.erase(villainBullets_.begin() + i);
 					i--;
