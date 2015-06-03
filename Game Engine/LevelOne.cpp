@@ -63,8 +63,10 @@ void LevelOne::initialize(HWND hwnd)
 
 	if (!yellowVillain_.initialize(this, &villainsTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
+	//yellowVillain_.setX(levelOneNS::LAVA_X - 200);
+	//yellowVillain_.setY(GAME_HEIGHT / 2);
 	yellowVillain_.setX(levelOneNS::LAVA_X - 200);
-	yellowVillain_.setY(GAME_HEIGHT / 2);
+	yellowVillain_.setY(-800);
 
 	//initialize ground
 	ground_.resize(3);
@@ -177,6 +179,14 @@ void LevelOne::releaseAll()
 	backgroundTexture_.onLostDevice();
 	backgroundTexture1_.onLostDevice();
 	backgroundTexture2_.onLostDevice();
+	marioTexture_.onLostDevice();
+	groundTexture_.onLostDevice();
+	ground1Texture_.onLostDevice();
+	lavaTexture_.onLostDevice();
+	spikeTexture_.onLostDevice();
+	airground1Texture_.onLostDevice();
+	airground2Texture_.onLostDevice();
+	airground3Texture_.onLostDevice();
 	World::releaseAll();
 }
 
@@ -185,5 +195,13 @@ void LevelOne::resetAll()
 	backgroundTexture_.onResetDevice();
 	backgroundTexture1_.onResetDevice();
 	backgroundTexture2_.onResetDevice();
+	marioTexture_.onResetDevice();
+	groundTexture_.onResetDevice();
+	ground1Texture_.onResetDevice();
+	lavaTexture_.onResetDevice();
+	spikeTexture_.onResetDevice();
+	airground1Texture_.onResetDevice();
+	airground2Texture_.onResetDevice();
+	airground3Texture_.onResetDevice();
 	World::resetAll();
 }
