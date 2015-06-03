@@ -412,7 +412,7 @@ void World::updateScroll()
 
 	if (withinHorizonalScroll_)
 	{
-		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - scrollX * 0.40);
+		backgroundImages_[0]->setX(backgroundImages_[0]->getX() - (scrollX * 0.4));
 		//paralax scrolling 
 		backgroundImages_[1]->setX(backgroundImages_[1]->getX() - (scrollX * 0.5));
 		backgroundImages_[2]->setX(backgroundImages_[2]->getX() - (scrollX * 0.9));
