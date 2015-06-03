@@ -9,6 +9,6 @@ bool PeriwinkleVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setEdge(periwinkleVillainNS::EDGE_RECT);
 	setCollisionType(entityNS::BOX);
 
-	Villain::initialize(gamePtr, textureM);
+	//Villain::initialize(gamePtr, textureM);
 	return true;
 }

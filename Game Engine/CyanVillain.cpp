@@ -9,6 +9,6 @@ bool CyanVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setEdge(cyanVillainNS::EDGE_RECT);
 	setCollisionType(entityNS::BOX);
 
-	Villain::initialize(gamePtr, textureM);
+	//Villain::initialize(gamePtr, textureM);
 	return true;
 }

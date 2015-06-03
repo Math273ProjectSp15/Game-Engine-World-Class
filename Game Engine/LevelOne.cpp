@@ -61,10 +61,10 @@ void LevelOne::initialize(HWND hwnd)
 	background1_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	background2_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT * 0.6);
 
-	if (!yellowVillain_.initialize(this, &villainsTexture_))
+	/*if (!yellowVillain_.initialize(this, &villainsTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
 	yellowVillain_.setX(levelOneNS::LAVA_X - 200);
-	yellowVillain_.setY(GAME_HEIGHT / 2);
+	yellowVillain_.setY(GAME_HEIGHT / 2);*/
 
 	//initialize ground
 	ground_.resize(3);
@@ -155,7 +155,7 @@ void LevelOne::initialize(HWND hwnd)
 	entities_.push_back(&airground_[4]);
 
 
-	villains_.push_back(&yellowVillain_);
+	//villains_.push_back(&yellowVillain_);
 
 	//Fill World containers with references to Image and Entity objects.
 	backgroundImages_.push_back(&background_);

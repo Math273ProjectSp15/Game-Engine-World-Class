@@ -9,7 +9,7 @@ bool PurpleVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setEdge(purpleVillainNS::EDGE_RECT);
 	setCollisionType(entityNS::BOX);
 
-	Villain::initialize(gamePtr, textureM);
+	//Villain::initialize(gamePtr, textureM);
 	return true;
 }
 

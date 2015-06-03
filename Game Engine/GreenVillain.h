@@ -21,5 +21,5 @@ class GreenVillain : public Villain
 public:
 	// inherited member functions
 	bool initialize(Game *gamePtr, TextureManager *textureM);
-	int getVillainHeight() { return 128; }
+	//int getVillainHeight() { return 128; }
 };

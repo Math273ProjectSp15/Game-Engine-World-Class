@@ -21,6 +21,6 @@ class PurpleVillain : public Villain
 public:
 	// inherited member functions
 	bool initialize(Game *gamePtr, TextureManager *textureM);
-	int getVillainHeight() { return 256; }
-private:
+	//int getVillainHeight() { return 256; }
+
 };

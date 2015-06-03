@@ -105,5 +105,5 @@ private:
 	Entity lava_;
 	Entity spike_;
 	
-	YellowVillain yellowVillain_;
+	//YellowVillain yellowVillain_;
 };

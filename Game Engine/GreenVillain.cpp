@@ -9,6 +9,6 @@ bool GreenVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setEdge(greenVillainNS::EDGE_RECT);
 	setCollisionType(entityNS::BOX);
 
-	Villain::initialize(gamePtr, textureM);
+	//Villain::initialize(gamePtr, textureM);
 	return true;
 }

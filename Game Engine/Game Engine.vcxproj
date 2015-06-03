@@ -54,6 +54,7 @@
     <ClCompile Include="RedVillain.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="villianBullet.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="YellowVillain.cpp" />
