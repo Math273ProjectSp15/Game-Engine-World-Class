@@ -101,8 +101,8 @@ private:
 	Image background1_;
 	Image background2_;
 
+	//Entity
 	Entity lava_;
 	Entity spike_;
-	
 	PurpleVillain yellowVillain_;
 };

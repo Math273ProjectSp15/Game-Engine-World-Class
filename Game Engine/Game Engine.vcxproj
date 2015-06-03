@@ -14,6 +14,8 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="CyanVillain.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="fireball.h" />
+    <ClInclude Include="fireWave.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameError.h" />
     <ClInclude Include="graphics.h" />
@@ -28,12 +30,15 @@
     <ClInclude Include="RedVillain.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="villainBullet.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="YellowVillain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CyanVillain.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="fireball.cpp" />
+    <ClCompile Include="fireWave.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="GreenVillain.cpp" />
@@ -47,6 +52,7 @@
     <ClCompile Include="RedVillain.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="villainBullet.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="YellowVillain.cpp" />

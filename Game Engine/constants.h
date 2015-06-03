@@ -68,7 +68,6 @@ const int GROUND_ENTITY_END_FRAME = 3;
 const float GROUND_Y_POSITION = GAME_HEIGHT - GROUND_ENTITY_HEIGHT;
 
 //mario Fireball1
-//
 const int MARIO_FIREBALL1_WIDTH = 128;
 const int MARIO_FIREBALL1_HEIGHT = 256;
 const int MARIO_FIREBALL1_COLUMNS = 13;
@@ -98,6 +97,12 @@ const int VILLAIN_FIREBALL_LEFT_RIGHT_SPACER = 20;
 const RECT VILLAIN_FIREBALL_EDGE = {-(VILLAIN_FIREBALL_WIDTH/2 - VILLAIN_FIREBALL_LEFT_RIGHT_SPACER), -(VILLAIN_FIREBALL_HEIGHT/2),
 										VILLAIN_FIREBALL_WIDTH/2 - VILLAIN_FIREBALL_LEFT_RIGHT_SPACER, VILLAIN_FIREBALL_HEIGHT/2 };
 
+//Direction
+enum Direction // coming from constants
+{
+	LEFT,
+	RIGHT
+};
 
 // audio files required by audio.cpp
 // WAVE_BANK must be location of .xwb file.

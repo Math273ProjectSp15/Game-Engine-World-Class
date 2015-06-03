@@ -34,6 +34,17 @@ void World::initialize(HWND hwnd)
 	if (!mario_.initialize(this, marioNS::WIDTH, marioNS::HEIGHT, marioNS::TEXTURE_COLS, &marioTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing mario entity"));
 
+	//bullets
+	//firewave
+	if (!fireWave_.initialize(this, &marioTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing fireWave entity"));
+
+	if (!fireball_.initialize(this, &marioTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing fireball entity"));
+
+	if (!villainBullet_.initialize(this, &villainsTexture_))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villainBullet entity"));
+
 	// initialize DirectX font
 	// 18 pixel high Arial
 	if (dxFont_->initialize(graphics, 18, true, false, "Arial") == false)
@@ -100,10 +111,30 @@ void World::update()      // must override pure virtual from Game
 	else if (input->isKeyDown(D_KEY))
 	{
 		mario_.setState(marioNS::CLAW_ATTACK);
+		fireWave temp = fireWave_;
+		if (mario_.getDirection() == marioNS::LEFT)
+		{
+			temp.set(mario_.getX(), mario_.getY(), LEFT);
+		}
+		else if (mario_.getDirection() == marioNS::RIGHT)
+		{
+			temp.set(mario_.getX(), mario_.getY(), RIGHT);
+		}
+		fireWaves_.push_back(temp);
 	}
 	else if (input->isKeyDown(S_KEY))
 	{
 		mario_.setState(marioNS::SHOOT_ATTACK);
+		fireball temp = fireball_;
+		if (mario_.getDirection() == marioNS::LEFT)
+		{
+			temp.set(mario_.getX(), mario_.getY(), LEFT);
+		}
+		else if (mario_.getDirection() == marioNS::RIGHT)
+		{
+			temp.set(mario_.getX(), mario_.getY(), RIGHT);
+		}
+		fireballs_.push_back(temp);
 	}
 	else
 	{
@@ -112,6 +143,20 @@ void World::update()      // must override pure virtual from Game
 	}
 	mario_.update(frameTime);
 	villains_[0]->update(frameTime);
+
+	//bullets
+	for (int i = 0; i < fireWaves_.size(); i++)
+	{
+		fireWaves_[i].update(frameTime);
+	}
+	for (int i = 0; i < fireballs_.size(); i++)
+	{
+		fireballs_[i].update(frameTime);
+	}
+	for (int i = 0; i < villainBullets_.size(); i++)
+	{
+		villainBullets_[i].update(frameTime);
+	}
 
 	if (moveUp && !marioStuckOnTop_)
 	{
@@ -130,7 +175,9 @@ void World::update()      // must override pure virtual from Game
 		updateScroll();
 	}
 	else
+	{
 		updateScroll();
+	}
 
 	marioStuckOnTop_ = false;
 	marioStuckOnBottom_ = false;
@@ -224,7 +271,30 @@ void World::render()      // "
 			}
 		}
 	}
+	//bullets
+	if (!fireWaves_.empty())
+	{
+		for (int i = 0; i < fireWaves_.size(); i++)
+		{
+			fireWaves_[i].draw();
+		}
+	}
+	if (!fireballs_.empty())
+	{
+		for (int i = 0; i < fireballs_.size(); i++)
+		{
+			fireballs_[i].draw();
+		}
+	}
+	if (!villainBullets_.empty())
+	{
+		for (int i = 0; i < villainBullets_.size(); i++)
+		{
+			villainBullets_[i].draw();
+		}
+	}
 
+	//villains
 	if (!villains_.empty())
 	{
 		for (auto villain : villains_)
