@@ -102,12 +102,8 @@ void Mario::update(float frameTime)
 		spriteData.x = 0;
 		velocity.x = 0;
 	}
-	//else if (spriteData.y > GROUND_Y_POSITION) // else if below ground
-	//{
-	//	//spriteData.y = GAME_HEIGHT - backgroundNS::GROUND_HEIGHT - marioNS::HEIGHT;
-	//	//onGround();
-	//	//marioDied();
-	//}
+
+	setEdge(marioNS::IDLE_RECT);
 
 	if (getState() == marioNS::IDLEING)
 	{
@@ -153,6 +149,7 @@ void Mario::update(float frameTime)
 	else if (getState() == marioNS::HORIZONTAL_ATTACK)
 	{
 		horizontalAttack_.update(frameTime);
+		setEdge(marioNS::HORIZONTAL_ATTACK_RECT);
 	}
 	else if (getState() == marioNS::CLAW_ATTACK)
 	{

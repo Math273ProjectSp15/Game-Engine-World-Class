@@ -72,6 +72,7 @@ namespace marioNS
 	const RECT JUMP_UP_RECT = {-64, -128, 64, 128};
 	const RECT JUMP_FALL_RECT = {-79, -128, 79, 128};
 	const RECT ROLLING_RECT = {-64, -29, 64, 29};
+	const RECT HORIZONTAL_ATTACK_RECT = {-256, -128, 256, 128};
 
 	enum State
 	{
@@ -132,8 +133,8 @@ public:
 
 	//set and get for dead_
 	bool isDead() { return dead_; }
-	void marioDied() { dead_ = true; }
-	void marioUndead() { dead_ = false; }
+	void died() { dead_ = true; }
+	void undead() { dead_ = false; }
 
 	void resetMario();
 protected:

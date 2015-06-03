@@ -57,13 +57,13 @@ void LevelOne::initialize(HWND hwnd)
 	if (!background2_.initialize(graphics, 0, 0, 0, &backgroundTexture2_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
 
-	background_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT);
+	background_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT * MAIN_BACKGROUND_SHIFT);
 	background1_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	background2_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT * 0.6);
 
 	if (!yellowVillain_.initialize(this, &villainsTexture_))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
-	yellowVillain_.setX(levelOneNS::LAVA_X + 300);
+	yellowVillain_.setX(levelOneNS::LAVA_X - 200);
 	yellowVillain_.setY(GAME_HEIGHT / 2);
 
 	//initialize ground

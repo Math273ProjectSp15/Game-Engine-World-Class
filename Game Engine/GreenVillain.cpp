@@ -7,5 +7,8 @@ bool GreenVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setCurrentFrame(greenVillainNS::START_FRAME);
 	setFrameDelay(greenVillainNS::ANIMATION_DELAY);
 	setEdge(greenVillainNS::EDGE_RECT);
+	setCollisionType(entityNS::BOX);
+
+	Villain::initialize(gamePtr, textureM);
 	return true;
 }

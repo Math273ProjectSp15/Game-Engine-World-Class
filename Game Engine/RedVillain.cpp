@@ -7,5 +7,8 @@ bool RedVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setCurrentFrame(redVillainNS::START_FRAME);
 	setFrameDelay(redVillainNS::ANIMATION_DELAY);
 	setEdge(redVillainNS::EDGE_RECT);
+	setCollisionType(entityNS::BOX);
+
+	Villain::initialize(gamePtr, textureM);
 	return true;
 }

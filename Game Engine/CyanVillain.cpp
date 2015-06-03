@@ -7,5 +7,8 @@ bool CyanVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setCurrentFrame(cyanVillainNS::START_FRAME);
 	setFrameDelay(cyanVillainNS::ANIMATION_DELAY);
 	setEdge(cyanVillainNS::EDGE_RECT);
+	setCollisionType(entityNS::BOX);
+
+	Villain::initialize(gamePtr, textureM);
 	return true;
 }
