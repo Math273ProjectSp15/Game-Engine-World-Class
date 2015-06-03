@@ -34,6 +34,7 @@ const char AIR_GROUND3_IMAGE[] = "pictures\\airground3.png";
 
 
 // window
+const bool SPAWN_CONTROL = false;
 const char CLASS_NAME[] = "MarioGame";
 const char GAME_TITLE[] = "MarioGame";
 const bool FULLSCREEN = true;              // windowed or fullscreen
