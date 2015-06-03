@@ -361,7 +361,13 @@ void World::updateScroll()
 	double scrollX = mario_.getX() - GAME_WIDTH / 2;
 	double scrollY = mario_.getY() - GAME_HEIGHT / 2;
 
-	marioPositionVector_.x += scrollX;
+	if (marioPositionVector_.x < GAME_WIDTH / 2 - worldNS::EDGE_SPACER)
+	{
+		marioPositionVector_.x = mario_.getX();
+		scrollX = 0;
+	}
+	else
+		marioPositionVector_.x += scrollX;
 	if (marioPositionVector_.y > 0)
 		marioPositionVector_.y = mario_.getY() - GAME_HEIGHT / 2;
 	else
