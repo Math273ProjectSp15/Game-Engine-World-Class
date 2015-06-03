@@ -150,7 +150,8 @@ void LevelOne::initialize(HWND hwnd)
 	entities_.push_back(&airground_[4]);
 
 
-	villains_.push_back(createVillain());
+	if (SPAWN_CONTROL)
+		villains_.push_back(createVillain());
 
 	//Fill World containers with references to Image and Entity objects.
 	backgroundImages_.push_back(&background_);

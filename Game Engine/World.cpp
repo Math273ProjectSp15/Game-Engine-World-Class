@@ -188,7 +188,8 @@ void World::update()      // must override pure virtual from Game
 	marioStuckOnRight_ = false;
 	marioStuckOnLeft_ = false;
 
-	updateVillainContainer();
+	if (SPAWN_CONTROL)
+		updateVillainContainer();
 
 }
 
