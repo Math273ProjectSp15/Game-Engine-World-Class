@@ -111,7 +111,7 @@ void World::update()      // must override pure virtual from Game
 		mario_.setEdge(marioNS::IDLE_RECT);
 	}
 	mario_.update(frameTime);
-	villains_[0]->update(frameTime);
+	villains_[0]->update(frameTime, marioPositionVector_);
 
 	if (moveUp && !marioStuckOnTop_)
 	{

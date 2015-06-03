@@ -8,6 +8,8 @@ namespace villainNS {
 	const int START_FRAME = 60;
 	const int END_FRAME = 65;
 	const double ANIMATION_DELAY = 0.1;
+	const float SPEED = 90;                // pixels per second
+	const float MASS = 1.0e6f;
 }
 
 class Villain : public Entity
@@ -16,7 +18,7 @@ public:
 	// inherited member functions
 	virtual void draw();
 	bool initialize(Game *gamePtr, TextureManager *textureM);
-	void update(float frameTime);
+	void update(float frameTime, VECTOR2 marioPosition);
 
 	virtual int getVillainHeight() = 0;
 

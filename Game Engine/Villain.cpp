@@ -15,22 +15,37 @@ bool Villain::initialize(Game *gamePtr, TextureManager *textureM)
 	return true;
 }
 
-void Villain::update(float frameTime)
+void Villain::update(float frameTime, VECTOR2 marioPosition)
 {
 	if (dead_)
 		deadImage_.update(frameTime);
 	else
-		Entity::update(frameTime);
+	{
 
-	if (!isOnGround())
-	{
-		velocity.y += frameTime * 3 * GRAVITY;
+		if (!isOnGround())
+		{
+			velocity.y += frameTime * 3 * GRAVITY;
+		}
+		else
+		{
+			velocity.y = 0;
+		}
+		spriteData.y += velocity.y * frameTime;
+
+		if (marioPosition.x < spriteData.x)
+		{
+			flipHorizontal(false);
+			velocity.x = -abs(villainNS::SPEED);
+		}
+		else
+		{
+			flipHorizontal(true);
+			velocity.x = abs(villainNS::SPEED);
+		}
+		spriteData.x += velocity.x * frameTime;
+
+		Entity::update(frameTime);
 	}
-	else
-	{
-		velocity.y = 0;
-	}
-	spriteData.y += velocity.y * frameTime;
 
 }
 

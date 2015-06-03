@@ -25,6 +25,7 @@
     <ClInclude Include="MarioGame.h" />
     <ClInclude Include="PeriwinkleVillain.h" />
     <ClInclude Include="PurpleVillain.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="RedVillain.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="textureManager.h" />
@@ -45,6 +46,7 @@
     <ClCompile Include="MarioGame.cpp" />
     <ClCompile Include="PeriwinkleVillain.cpp" />
     <ClCompile Include="PurpleVillain.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="RedVillain.cpp" />
     <ClCompile Include="textDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
