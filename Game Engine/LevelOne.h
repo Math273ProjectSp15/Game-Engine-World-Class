@@ -10,7 +10,7 @@
 
 namespace levelOneNS 
 {
-	const int worldWidth = 3072;
+	const int worldWidth = 3000;
 	const int worldHeight = 1536;
 	
 	const int MAP_WIDTH = 3072;
