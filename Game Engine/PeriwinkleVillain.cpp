@@ -7,5 +7,8 @@ bool PeriwinkleVillain::initialize(Game *gamePtr, TextureManager *textureM)
 	setCurrentFrame(periwinkleVillainNS::START_FRAME);
 	setFrameDelay(periwinkleVillainNS::ANIMATION_DELAY);
 	setEdge(periwinkleVillainNS::EDGE_RECT);
+	setCollisionType(entityNS::BOX);
+
+	Villain::initialize(gamePtr, textureM);
 	return true;
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "Villain.h"
 
 namespace yellowVillainNS
 {
@@ -9,16 +9,17 @@ namespace yellowVillainNS
 	const int START_FRAME = 0; 
 	const int END_FRAME = 8;  
 	const double ANIMATION_DELAY = 0.1;
-	const float SPEED = 200;                // pixels per second
+	const float SPEED = 90;                // pixels per second
 	const float MASS = 1.0e6f;
 
 	//Collision RECTS      left, top, right, bottom
 	const RECT EDGE_RECT = { -77, -128, 76, 128 };
 }
 
-class YellowVillain : public Entity
+class YellowVillain : public Villain
 {
 public:
 	// inherited member functions
 	virtual bool initialize(Game *gamePtr, TextureManager *textureM);
+	int getVillainHeight() { return 128; }
 };
