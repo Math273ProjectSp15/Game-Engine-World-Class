@@ -4,7 +4,7 @@ LevelOne::LevelOne()
 {
 	worldWidth_ = levelOneNS::worldWidth;
 	worldHeight_ = levelOneNS::worldHeight;
-	marioPositionVector_.x = levelOneNS::marioInitialPositionX;
+	marioPositionVector_.x = GAME_WIDTH / 2;
 	marioPositionVector_.y = levelOneNS::marioInitialPositionY;
 	marioInitialPositionVector_.x = marioPositionVector_.x;
 	marioInitialPositionVector_.y = marioPositionVector_.y;
@@ -60,11 +60,9 @@ void LevelOne::initialize(HWND hwnd)
 	background_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT * MAIN_BACKGROUND_SHIFT);
 	background1_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT);
 	background2_.setY((float)GAME_HEIGHT - (float)MAP_HEIGHT * 0.6);
-
-	/*if (!yellowVillain_.initialize(this, &villainsTexture_))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing villain entity"));
-	yellowVillain_.setX(levelOneNS::LAVA_X - 200);
-	yellowVillain_.setY(GAME_HEIGHT / 2);*/
+	background_.setX(-(worldNS::EDGE_SPACER * 2));
+	background1_.setX(-(worldNS::EDGE_SPACER * 2));
+	background2_.setX(-(worldNS::EDGE_SPACER * 2));
 
 	//initialize ground
 	ground_.resize(3);
@@ -155,7 +153,7 @@ void LevelOne::initialize(HWND hwnd)
 	entities_.push_back(&airground_[4]);
 
 
-	//villains_.push_back(&yellowVillain_);
+	villains_.push_back(createVillain());
 
 	//Fill World containers with references to Image and Entity objects.
 	backgroundImages_.push_back(&background_);
@@ -169,6 +167,14 @@ void LevelOne::releaseAll()
 	backgroundTexture_.onLostDevice();
 	backgroundTexture1_.onLostDevice();
 	backgroundTexture2_.onLostDevice();
+	marioTexture_.onLostDevice();
+	groundTexture_.onLostDevice();
+	ground1Texture_.onLostDevice();
+	lavaTexture_.onLostDevice();
+	spikeTexture_.onLostDevice();
+	airground1Texture_.onLostDevice();
+	airground2Texture_.onLostDevice();
+	airground3Texture_.onLostDevice();
 	World::releaseAll();
 }
 
@@ -177,5 +183,13 @@ void LevelOne::resetAll()
 	backgroundTexture_.onResetDevice();
 	backgroundTexture1_.onResetDevice();
 	backgroundTexture2_.onResetDevice();
+	marioTexture_.onResetDevice();
+	groundTexture_.onResetDevice();
+	ground1Texture_.onResetDevice();
+	lavaTexture_.onResetDevice();
+	spikeTexture_.onResetDevice();
+	airground1Texture_.onResetDevice();
+	airground2Texture_.onResetDevice();
+	airground3Texture_.onResetDevice();
 	World::resetAll();
 }

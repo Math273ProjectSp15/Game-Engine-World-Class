@@ -36,10 +36,13 @@ const char AIR_GROUND3_IMAGE[] = "pictures\\airground3.png";
 // window
 const char CLASS_NAME[] = "MarioGame";
 const char GAME_TITLE[] = "MarioGame";
-const bool FULLSCREEN = false;              // windowed or fullscreen
-const UINT GAME_WIDTH =  1200;               // width of game in pixels
-const UINT GAME_HEIGHT = 800;               // height of game in pixels
+const bool FULLSCREEN = true;              // windowed or fullscreen
+const UINT GAME_WIDTH = 1366;              // width of game in pixels
+const UINT GAME_HEIGHT = 768;               // height of game in pixels
 const double MAIN_BACKGROUND_SHIFT = 0.8;   //Shift background up or down to view clouds
+const int VILLAIN_DROP_ZONE = -800;			//Villains are initialized at this y coordinate
+const int VILLAIN_EDGE_SPACER = 1000;        //This is used to prevent a villain from being initialized beyond the level bounds.
+const double VILLAIN_SPAWN_TIME = 2.0;
  
 // game
 const bool VSYNC = true;                    // true locks display to vertical sync rate

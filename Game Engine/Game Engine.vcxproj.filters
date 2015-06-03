@@ -87,6 +87,9 @@
     <ClInclude Include="Villain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entity.cpp">
@@ -143,16 +146,22 @@
     <ClCompile Include="textDX.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fireWave.cpp">
+    <ClCompile Include="fireball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fireball.cpp">
+    <ClCompile Include="fireWave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="villianBullet.cpp">
+    <ClCompile Include="Villain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="villainBullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

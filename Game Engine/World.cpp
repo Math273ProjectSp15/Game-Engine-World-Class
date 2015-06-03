@@ -111,30 +111,38 @@ void World::update()      // must override pure virtual from Game
 	else if (input->isKeyDown(D_KEY))
 	{
 		mario_.setState(marioNS::CLAW_ATTACK);
-		fireWave temp = fireWave_;
-		if (mario_.getDirection() == marioNS::LEFT)
+		if (count_ >= 15)
 		{
-			temp.set(mario_.getX(), mario_.getY(), LEFT);
+			fireWave temp = fireWave_;
+			if (mario_.getDirection() == marioNS::LEFT)
+			{
+				temp.set(mario_.getX(), mario_.getY(), LEFT);
+			}
+			else if (mario_.getDirection() == marioNS::RIGHT)
+			{
+				temp.set(mario_.getX(), mario_.getY(), RIGHT);
+			}
+			fireWaves_.push_back(temp);
+			count_ = 0;
 		}
-		else if (mario_.getDirection() == marioNS::RIGHT)
-		{
-			temp.set(mario_.getX(), mario_.getY(), RIGHT);
-		}
-		fireWaves_.push_back(temp);
 	}
 	else if (input->isKeyDown(S_KEY))
 	{
 		mario_.setState(marioNS::SHOOT_ATTACK);
-		fireball temp = fireball_;
-		if (mario_.getDirection() == marioNS::LEFT)
+		if (count_ >= 15)
 		{
-			temp.set(mario_.getX(), mario_.getY(), LEFT);
+			fireball temp = fireball_;
+			if (mario_.getDirection() == marioNS::LEFT)
+			{
+				temp.set(mario_.getX(), mario_.getY(), LEFT);
+			}
+			else if (mario_.getDirection() == marioNS::RIGHT)
+			{
+				temp.set(mario_.getX(), mario_.getY(), RIGHT);
+			}
+			fireballs_.push_back(temp);
+			count_ = 0;
 		}
-		else if (mario_.getDirection() == marioNS::RIGHT)
-		{
-			temp.set(mario_.getX(), mario_.getY(), RIGHT);
-		}
-		fireballs_.push_back(temp);
 	}
 	else
 	{
@@ -161,6 +169,7 @@ void World::update()      // must override pure virtual from Game
 	{
 		villainBullets_[i].update(frameTime);
 	}
+	count_++;
 
 	if (moveUp && !marioStuckOnTop_)
 	{
@@ -265,6 +274,39 @@ void World::collisions()  // "
 				villain->notOnGround();
 		}
 	}
+	for (auto villain : villains_)
+	{
+		for (int i = 0; i < fireWaves_.size(); i++)
+		{
+			VECTOR2 cv;
+			if (villain->collidesWith(fireWaves_[i], cv))
+			{
+				villain->died();
+			}
+		}
+	}
+	for (auto villain : villains_)
+	{
+		for (int i = 0; i < fireballs_.size(); i++)
+		{
+			VECTOR2 cv;
+			if (villain->collidesWith(fireballs_[i], cv))
+			{
+				villain->died();
+			}
+		}
+	}
+	for (auto villain : villains_)
+	{
+		for (int i = 0; i < villainBullets_.size(); i++)
+		{
+			VECTOR2 cv;
+			if (villain->collidesWith(villainBullets_[i], cv))
+			{
+				villain->died();
+			}
+		}
+	}
 	if (!collisionDetected)
 	{
 		mario_.notOnGround();
@@ -301,28 +343,51 @@ void World::render()      // "
 	{
 		for (int i = 0; i < fireWaves_.size(); i++)
 		{
-			fireWaves_[i].draw();
+			if (fireWaves_[i].getX() > windowRECT_.right || fireWaves_[i].getX() + fireWaves_[i].getWidth() < windowRECT_.left)
+			{
+				fireWaves_.erase(fireWaves_.begin() + i);
+				i--;
+			}
+			else
+			{
+				fireWaves_[i].draw();
+			}
 		}
 	}
 	if (!fireballs_.empty())
 	{
 		for (int i = 0; i < fireballs_.size(); i++)
 		{
-			fireballs_[i].draw();
+			if (fireballs_[i].getX() > windowRECT_.right || fireballs_[i].getX() + fireballs_[i].getWidth() < windowRECT_.left)
+			{
+				fireballs_.erase(fireballs_.begin() + i);
+				i--;
+			}
+			else
+			{
+				fireballs_[i].draw();
+			}
 		}
 	}
 	if (!villainBullets_.empty())
 	{
 		for (int i = 0; i < villainBullets_.size(); i++)
 		{
-			villainBullets_[i].draw();
+			if (villainBullets_[i].getX() > windowRECT_.right || villainBullets_[i].getX() + villainBullets_[i].getWidth() < windowRECT_.left)
+			{
+				villainBullets_.erase(villainBullets_.begin() + i);
+				i--;
+			}
+			else
+			{
+				villainBullets_[i].draw();
+			}
 		}
 	}
 
 	//villains
 	if (!villains_.empty())
 	{
-
 		for (auto villain : villains_)
 		{
 			villain->draw();
@@ -436,6 +501,42 @@ void World::updateScroll()
 		}
 	}
 
+	//bullets
+	for (int i = 0; i < fireballs_.size(); i++)
+	{
+		if (withinHorizonalScroll_)
+		{
+			fireballs_[i].setX(fireballs_[i].getX() - scrollX);
+		}
+		if (withinVerticalScroll_)
+		{
+			fireballs_[i].setY(fireballs_[i].getY() - scrollY);
+		}
+	}
+
+	for (int i = 0; i < fireWaves_.size(); i++)
+	{
+		if (withinHorizonalScroll_)
+		{
+			fireWaves_[i].setX(fireWaves_[i].getX() - scrollX);
+		}
+		if (withinVerticalScroll_)
+		{
+			fireWaves_[i].setY(fireWaves_[i].getY() - scrollY);
+		}
+	}
+	for (int i = 0; i < villainBullets_.size(); i++)
+	{
+		if (withinHorizonalScroll_)
+		{
+			villainBullets_[i].setX(villainBullets_[i].getX() - scrollX);
+		}
+		if (withinVerticalScroll_)
+		{
+			villainBullets_[i].setY(villainBullets_[i].getY() - scrollY);
+		}
+	}
+	
 	if (!villains_.empty())
 	{
 		for (auto villain : villains_)

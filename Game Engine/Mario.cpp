@@ -179,6 +179,7 @@ void Mario::update(float frameTime)
 	}
 
 	spriteData.y += velocity.y * frameTime;
+	spriteData.x += velocity.x * frameTime;
 }
 
 //=============================================================================

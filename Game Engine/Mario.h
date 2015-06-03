@@ -74,7 +74,7 @@ namespace marioNS
 	const float DYING_IMAGE_ANIMATION_DELAY = 0.1f;
 
 	//Collision RECTS      left, top, right, bottom
-	const RECT IDLE_RECT = {-40, -128, 40, 128};
+	const RECT IDLE_RECT = {-40, -100, 40, 128};
 	const RECT RUN_RECT = { -40, -128, 40, 128 };
 	const RECT JUMP_UP_RECT = {-64, -128, 64, 128};
 	const RECT JUMP_FALL_RECT = {-79, -128, 79, 128};

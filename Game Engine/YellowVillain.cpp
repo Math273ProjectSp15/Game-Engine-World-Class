@@ -1,5 +1,12 @@
 #include "YellowVillain.h"
 
+YellowVillain::YellowVillain(Game *gamePtr, TextureManager *textureM, int X, int Y)
+{
+	initialize(gamePtr, textureM);
+	setX(X);
+	setY(Y);
+}
+
 bool YellowVillain::initialize(Game *gamePtr, TextureManager *textureM)
 {
 	Entity::initialize(gamePtr, yellowVillainNS::WIDTH, yellowVillainNS::HEIGHT, yellowVillainNS::TEXTURE_COLS, textureM);
